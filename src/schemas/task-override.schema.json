@@ -65,6 +65,26 @@
           },
           "additionalProperties": true
         }
+      },
+      "taskRequirements": {
+        "type": "array",
+        "description": "Task prerequisites/requirements",
+        "items": {
+          "type": "object",
+          "properties": {
+            "task": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" }
+              },
+              "required": ["id", "name"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["task"],
+          "additionalProperties": true
+        }
       }
     },
     "additionalProperties": true

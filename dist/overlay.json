@@ -4,7 +4,15 @@
       "minPlayerLevel": 10
     },
     "5c0bd94186f7747a727f09b2": {
-      "minPlayerLevel": 18
+      "minPlayerLevel": 18,
+      "taskRequirements": [
+        {
+          "task": {
+            "id": "657315df034d76585f032e01",
+            "name": "Shooting Cans"
+          }
+        }
+      ]
     },
     "63a5cf262964a7488f5243ce": {
       "minPlayerLevel": 22
@@ -129,7 +137,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2025-12-20T19:26:01.333Z",
-    "sha256": "d642d37aec0129534169b68e297685bd07783f2e511176367e1b801df6b82099"
+    "generated": "2025-12-21T01:15:49.134Z",
+    "sha256": "429c790f63b058bd11a2467f09e0c4e910dff65c39a1b5c52efb6dff9b3378e3"
   }
 }

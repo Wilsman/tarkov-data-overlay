@@ -6,10 +6,18 @@
     minPlayerLevel: 10, // Was: 20
   },
 
-  // Test Drive - Part 1 - Level requirement incorrect
+  // Test Drive - Part 1 - Level requirement and task prerequisite incorrect
   // Proof: https://escapefromtarkov.fandom.com/wiki/Test_Drive_-_Part_1
   "5c0bd94186f7747a727f09b2": {
     minPlayerLevel: 18, // Was: 30
+    taskRequirements: [
+      {
+        task: {
+          id: "657315df034d76585f032e01",
+          name: "Shooting Cans",
+        },
+      },
+    ], // Was: Grenadier (5c0d190cd09282029f5390d8)
   },
 
   // Test Drive - Part 2 - Level requirement incorrect
