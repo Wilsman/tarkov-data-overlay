@@ -30,3 +30,6 @@ npm-debug.log*
 
 # Test coverage
 coverage/
+
+# Generated data (wiki cache, API cache, comparison results)
+data/

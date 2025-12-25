@@ -85,6 +85,36 @@
           "required": ["task"],
           "additionalProperties": true
         }
+      },
+      "experience": {
+        "type": "integer",
+        "minimum": 0,
+        "description": "Experience points rewarded on task completion"
+      },
+      "finishRewards": {
+        "type": "object",
+        "description": "Rewards given on task completion",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "Item rewards (including money)",
+            "items": {
+              "type": "object",
+              "properties": {
+                "item": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "name": { "type": "string" }
+                  },
+                  "required": ["id", "name"]
+                },
+                "count": { "type": "integer", "minimum": 1 }
+              },
+              "required": ["item", "count"]
+            }
+          }
+        }
       }
     },
     "additionalProperties": true

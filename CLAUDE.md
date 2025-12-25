@@ -14,26 +14,8 @@ npm run build           # Build dist/overlay.json from source files
 npm run check-overrides # Check if overrides are still needed (queries tarkov.dev API)
 npm test                # Run tests (vitest)
 npm run test:watch      # Run tests in watch mode
+npx vitest run tests/file-loader.test.ts  # Run a single test file
 ```
-
-### Checking Override Validity
-
-The `check-overrides` script validates whether existing overrides are still needed by comparing them against current tarkov.dev API data:
-
-```bash
-npm run check-overrides
-```
-
-This will:
-- Load all task overrides from `src/overrides/tasks.json5`
-- Query the tarkov.dev API for current data
-- Compare each override field-by-field
-- Report which overrides are:
-  - ✅ Still needed (API data still incorrect)
-  - 🔄 Fixed in API (can be removed)
-  - 🗑️  Task removed from API (can be deleted)
-
-Run this periodically (weekly/monthly) to keep the overlay lean and up-to-date.
 
 ## Architecture
 
@@ -41,6 +23,15 @@ Run this periodically (weekly/monthly) to keep the overlay lean and up-to-date.
 - `src/overrides/` - JSON5 files for correcting tarkov.dev data (tasks.json5, items.json5, traders.json5, hideout.json5)
 - `src/additions/` - JSON5 files for new data not in tarkov.dev (editions.json5)
 - `src/schemas/` - JSON Schema files for validation
+- `src/lib/` - Shared TypeScript library used by all scripts
+
+### Shared Library (src/lib/)
+Scripts share utilities via `src/lib/index.ts`:
+- `file-loader.ts` - JSON5/JSON loading, project paths, directory scanning
+- `tarkov-api.ts` - GraphQL client for tarkov.dev API queries
+- `task-validator.ts` - Override validation logic against API data
+- `terminal.ts` - Console output formatting (colors, icons, progress)
+- `types.ts` - Shared TypeScript interfaces and schema configs
 
 ### Build Pipeline
 1. `scripts/validate.ts` - Validates JSON5 source files against schemas using AJV
@@ -75,3 +66,4 @@ Example:
 - Field names must match tarkov.dev API exactly (camelCase)
 - Nested patches (like objectives) use ID-keyed objects, not arrays
 - Empty override files are valid and skipped during build
+- Add new schemas to `SCHEMA_CONFIGS` in `src/lib/types.ts` when adding new entity types
