@@ -139,6 +139,9 @@ const API_CACHE_FILE = path.join(CACHE_DIR, 'tarkov-api-tasks.json');
 // Overlay file for filtering already-addressed discrepancies
 const TASKS_OVERLAY_FILE = path.join(process.cwd(), 'src', 'overrides', 'tasks.json5');
 
+// Suppressions file for discrepancies where wiki is wrong and API is correct
+const WIKI_INCORRECT_FILE = path.join(process.cwd(), 'src', 'suppressions', 'wiki-incorrect.json5');
+
 const EXTENDED_TASKS_QUERY = `
   query($gameMode: GameMode) {
     tasks(lang: en, gameMode: $gameMode) {
@@ -330,37 +333,62 @@ function saveWikiCache(
 }
 
 /**
- * Load the tasks overlay and return a Set of "taskId:field" keys that are already overridden
+ * Load suppressed fields from both:
+ * 1. Tasks overlay (API was wrong, we corrected it)
+ * 2. Wiki-incorrect suppressions (API is correct, wiki is wrong)
+ *
+ * Returns a Set of "taskId:field" keys to exclude from results
  */
-function loadOverriddenFields(): Set<string> {
-  const overridden = new Set<string>();
+function loadSuppressedFields(): { suppressed: Set<string>; overlayCount: number; wikiIncorrectCount: number } {
+  const suppressed = new Set<string>();
+  let overlayCount = 0;
+  let wikiIncorrectCount = 0;
 
-  if (!fs.existsSync(TASKS_OVERLAY_FILE)) {
-    return overridden;
-  }
+  // Load overlay file (corrections where API was wrong)
+  if (fs.existsSync(TASKS_OVERLAY_FILE)) {
+    try {
+      const content = fs.readFileSync(TASKS_OVERLAY_FILE, 'utf-8');
+      const overlay = JSON5.parse(content) as Record<string, Record<string, unknown>>;
 
-  try {
-    const content = fs.readFileSync(TASKS_OVERLAY_FILE, 'utf-8');
-    const overlay = JSON5.parse(content) as Record<string, Record<string, unknown>>;
-
-    for (const [taskId, fields] of Object.entries(overlay)) {
-      for (const field of Object.keys(fields)) {
-        // Map overlay field names to discrepancy field names
-        if (field === 'objectives') {
-          overridden.add(`${taskId}:objectives.count`);
-        } else if (field === 'experience' || field === 'minPlayerLevel' ||
-                   field === 'taskRequirements' || field === 'reputation' || field === 'money') {
-          overridden.add(`${taskId}:${field}`);
+      for (const [taskId, fields] of Object.entries(overlay)) {
+        for (const field of Object.keys(fields)) {
+          // Map overlay field names to discrepancy field names
+          if (field === 'objectives') {
+            suppressed.add(`${taskId}:objectives.count`);
+            overlayCount++;
+          } else if (field === 'experience' || field === 'minPlayerLevel' ||
+                     field === 'taskRequirements' || field === 'reputation' || field === 'money' ||
+                     field === 'finishRewards') {
+            suppressed.add(`${taskId}:${field}`);
+            overlayCount++;
+          }
+          // Also add the raw field name for flexibility
+          suppressed.add(`${taskId}:${field}`);
         }
-        // Also add the raw field name for flexibility
-        overridden.add(`${taskId}:${field}`);
       }
+    } catch (error) {
+      console.warn('Warning: Could not load overlay file:', error);
     }
-  } catch (error) {
-    console.warn('Warning: Could not load overlay file:', error);
   }
 
-  return overridden;
+  // Load wiki-incorrect suppressions (where API is correct, wiki is wrong)
+  if (fs.existsSync(WIKI_INCORRECT_FILE)) {
+    try {
+      const content = fs.readFileSync(WIKI_INCORRECT_FILE, 'utf-8');
+      const suppressions = JSON5.parse(content) as Record<string, string[]>;
+
+      for (const [taskId, fields] of Object.entries(suppressions)) {
+        for (const field of fields) {
+          suppressed.add(`${taskId}:${field}`);
+          wikiIncorrectCount++;
+        }
+      }
+    } catch (error) {
+      console.warn('Warning: Could not load wiki-incorrect file:', error);
+    }
+  }
+
+  return { suppressed, overlayCount, wikiIncorrectCount };
 }
 
 function parseArgs(argv: string[]): CliOptions & { help?: boolean } {
@@ -1062,10 +1090,10 @@ async function runBulkMode(tasks: ExtendedTaskData[], options: CliOptions): Prom
   const tasksWithWiki = tasks.filter(t => t.wikiLink);
   printProgress(`Found ${tasksWithWiki.length}/${tasks.length} tasks with wiki links`);
 
-  // Load already-overridden fields to filter them out
-  const overriddenFields = loadOverriddenFields();
-  if (overriddenFields.size > 0) {
-    printProgress(`Loaded ${overriddenFields.size} overridden field(s) from overlay`);
+  // Load suppressed fields (overlay corrections + wiki-incorrect suppressions)
+  const { suppressed, overlayCount, wikiIncorrectCount } = loadSuppressedFields();
+  if (overlayCount > 0 || wikiIncorrectCount > 0) {
+    printProgress(`Loaded ${overlayCount} overlay correction(s), ${wikiIncorrectCount} wiki-incorrect suppression(s)`);
   }
 
   const allDiscrepancies: Discrepancy[] = [];
@@ -1110,15 +1138,15 @@ async function runBulkMode(tasks: ExtendedTaskData[], options: CliOptions): Prom
   console.log(`Wiki errors: ${errors}`);
   console.log(`Total discrepancies found: ${allDiscrepancies.length}`);
 
-  // Filter out already-overridden discrepancies
+  // Filter out suppressed discrepancies (overlay corrections + wiki-incorrect)
   const newDiscrepancies = allDiscrepancies.filter(d => {
     const key = `${d.taskId}:${d.field}`;
-    return !overriddenFields.has(key);
+    return !suppressed.has(key);
   });
   const filteredCount = allDiscrepancies.length - newDiscrepancies.length;
 
   if (filteredCount > 0) {
-    console.log(`${dim(`Already addressed in overlay: ${filteredCount}`)}`);
+    console.log(`${dim(`Suppressed (overlay + wiki-incorrect): ${filteredCount}`)}`);
   }
   console.log(`${bold(`New discrepancies to review: ${newDiscrepancies.length}`)}`);
 

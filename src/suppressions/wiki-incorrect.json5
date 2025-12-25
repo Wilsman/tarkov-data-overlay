@@ -1,0 +1,47 @@
+{
+  // This file tracks discrepancies where the WIKI is incorrect and the API is correct.
+  // These entries are excluded from comparison results to avoid re-reviewing validated data.
+  //
+  // Format: taskId -> array of field names that have been verified as correct in API
+  // Each entry should include a comment with the verification source and date.
+
+  // Every Hunter Knows This - Money reward correct in API
+  // Verified in-game: 32,000 Roubles (2025-12-25)
+  "66b38e144f2ab7cc530c3fe7": ["money"],
+
+  // Rite of Passage - Money reward correct in API
+  // Verified in-game: 202,000 Roubles (2025-12-25)
+  "675c1ec7a46173572a0bf20a": ["money"],
+
+  // Possessor - Money reward correct in API
+  // Verified in-game: 47,000 Roubles (2025-12-25)
+  "669fa399033a3ce9870338a8": ["money"],
+
+  // Passion for Ergonomics - Money reward correct in API
+  // Verified in-game: 25,000 Roubles (2025-12-25)
+  "675c1570526ff496850895d9": ["money"],
+
+  // Dragnet - Money reward correct in API
+  // Verified in-game: 92,000 Roubles (2025-12-25)
+  "669fa3a08b4a64b332041ff7": ["money"],
+
+  // Gunsmith - Old Friend's Request - Money reward correct in API
+  // Verified in-game: 155,000 Roubles (2025-12-25)
+  "676529af9c90953d090882e7": ["money"],
+
+  // Abandoned Cargo - Money reward correct in API
+  // Verified in-game: 45,000 Roubles (2025-12-25)
+  "675c03d1f7da9792a405549a": ["money"],
+
+  // Break the Deal - Money reward correct in API
+  // Verified in-game: 105,000 Roubles (2025-12-25)
+  "675c085d59b0575973005f52": ["money"],
+
+  // Fertilizers - Money reward correct in API
+  // Verified in-game: 40,000 Roubles (2025-12-25)
+  "5c1128e386f7746565181106": ["money", "reputation.Mechanic"],
+
+  // Samples - Experience correct in API
+  // Verified in-game: 15,300 XP (2025-12-25)
+  "5edac020218d181e29451446": ["experience"],
+}
