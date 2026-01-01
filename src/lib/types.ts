@@ -15,6 +15,7 @@ export interface TaskOverride {
   kappaRequired?: boolean;
   lightkeeperRequired?: boolean;
   objectives?: Record<string, ObjectiveOverride>;
+  objectivesAdd?: ObjectiveAdd[];
   taskRequirements?: TaskRequirement[];
   experience?: number;
   finishRewards?: TaskFinishRewards;
@@ -54,6 +55,22 @@ export interface TaskItemRef {
 
 /** Objective override for nested corrections */
 export interface ObjectiveOverride extends Omit<Partial<TaskObjective>, "id"> {}
+
+/** Objective addition for missing objectives */
+/** Task item reference for added objectives (allows name-only references) */
+export interface TaskItemRefAdd {
+  id?: string;
+  name: string;
+  shortName?: string;
+}
+
+/** Objective addition for missing objectives */
+export interface ObjectiveAdd
+  extends Omit<Partial<TaskObjective>, "id" | "description" | "items"> {
+  id: string;
+  description: string;
+  items?: TaskItemRefAdd[];
+}
 
 /** Task requirement reference */
 export interface TaskRequirement {

@@ -8,6 +8,139 @@
         "description": "Mark task as disabled/removed from standard gameplay. Consumers should filter out disabled tasks.",
         "type": "boolean"
       },
+      "objectivesAdd": {
+        "type": "array",
+        "description": "Objective additions for missing API objectives",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "type": { "type": "string" },
+            "containsAll": {
+              "items": {
+                "properties": {
+                  "id": { "type": "string" },
+                  "name": { "type": "string" },
+                  "shortName": { "type": "string" }
+                },
+                "required": ["id", "name"],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "count": { "type": "integer", "minimum": 1 },
+            "description": { "type": "string" },
+            "foundInRaid": { "type": "boolean" },
+            "item": {
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "shortName": { "type": "string" }
+              },
+              "required": ["id", "name"],
+              "type": "object"
+            },
+            "maps": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "name": { "type": "string" }
+                },
+                "required": ["id", "name"]
+              }
+            },
+            "markerItem": {
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "shortName": { "type": "string" }
+              },
+              "required": ["id", "name"],
+              "type": "object"
+            },
+            "items": {
+              "type": "array",
+              "description": "Objective items can be referenced by name only when adding missing objectives.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "name": { "type": "string" },
+                  "shortName": { "type": "string" }
+                },
+                "required": ["name"]
+              }
+            },
+            "questItem": {
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "shortName": { "type": "string" }
+              },
+              "required": ["id", "name"],
+              "type": "object"
+            },
+            "requiredKeys": {
+              "items": {
+                "items": {
+                  "properties": {
+                    "id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "shortName": { "type": "string" }
+                  },
+                  "required": ["id", "name"],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "type": "array"
+            },
+            "useAny": {
+              "items": {
+                "properties": {
+                  "id": { "type": "string" },
+                  "name": { "type": "string" },
+                  "shortName": { "type": "string" }
+                },
+                "required": ["id", "name"],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "usingWeapon": {
+              "items": {
+                "properties": {
+                  "id": { "type": "string" },
+                  "name": { "type": "string" },
+                  "shortName": { "type": "string" }
+                },
+                "required": ["id", "name"],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "usingWeaponMods": {
+              "items": {
+                "items": {
+                  "properties": {
+                    "id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "shortName": { "type": "string" }
+                  },
+                  "required": ["id", "name"],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "type": "array"
+            }
+          },
+          "required": ["id", "description"],
+          "additionalProperties": false
+        }
+      },
       "experience": {
         "description": "Experience points rewarded on task completion",
         "minimum": 0,
