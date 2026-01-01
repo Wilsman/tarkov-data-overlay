@@ -106,6 +106,32 @@
         ]
       }
     },
+    "5c51aac186f77432ea65c552": {
+      "objectivesAdd": [
+        {
+          "id": "collector-missing-items-1",
+          "description": "Hand over the found in raid Collector items",
+          "items": [
+            {
+              "id": "69398e94ca94fd2877039504",
+              "name": "Nut Sack balaclava"
+            },
+            {
+              "id": "6937edb912d456a817083e82",
+              "name": "Mazoni golden dumbbell"
+            },
+            {
+              "id": "6937ecf8628ee476240c07cb",
+              "name": "Tigzresq splint"
+            },
+            {
+              "id": "6937f02dfd6488bb27024839",
+              "name": "Domontovich ushanka hat"
+            }
+          ]
+        }
+      ]
+    },
     "63a5cf262964a7488f5243ce": {
       "experience": 12000,
       "map": {
@@ -390,7 +416,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-01-01T20:49:47.714Z",
-    "sha256": "0647805d64e001e149dfd8f3c8c3c86c4ed95d16ec6c6a22847eed192798cc6d"
+    "generated": "2026-01-01T22:21:47.997Z",
+    "sha256": "9d49e617deb9962b1ce6a76451241e5050d6c8e2a6fb7aa97ac084ecc40c5af0"
   }
 }
