@@ -2,12 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches: [prod]
 
 jobs:
-  validate:
+  build:
     name: Validate & Build
     runs-on: ubuntu-latest
 
@@ -29,12 +27,3 @@ jobs:
 
       - name: Build overlay
         run: npm run build
-
-      - name: Commit dist (main branch only)
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add dist/
-          git diff --staged --quiet || git commit -m "chore: build overlay [skip ci]"
-          git push

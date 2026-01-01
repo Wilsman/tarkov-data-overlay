@@ -1,0 +1,24 @@
+name: Deploy
+
+on:
+  push:
+    branches: [prod]
+  workflow_dispatch:
+
+jobs:
+  sync-and-reload:
+    name: Sync & Reload
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Sync repository and restart monitor
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ${{ secrets.SSH_PROJECT_PATH }}
+            git pull
+            pm2 restart monitor
