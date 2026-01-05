@@ -307,6 +307,17 @@
     },
   },
 
+  // No Swiping - Objective count incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/No_Swiping
+  // Recent wiki update (post-1.0); 25 kills to 10
+  "658027799634223183395339": {
+    objectives: {
+      "65802779963422318339533c": {
+        count: 10, // Was: 25
+      },
+    },
+  },
+
   // Escort - Level requirement incorrect
   // Proof: https://escapefromtarkov.fandom.com/wiki/Escort
   // User confirmed: level 46 required, not 60
