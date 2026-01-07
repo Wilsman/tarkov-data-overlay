@@ -290,6 +290,16 @@
           "description": "Eliminate 5 Scavs on Shoreline (In one raid)"
         }
       }
+    },
+    "66631493312343839d032d22": {
+      "objectives": {
+        "666733e565831d5bafa18bbb": {
+          "description": "Stash a Cultist knife at the sawmill marked circle on Woods"
+        },
+        "666733e7430c8972d6a5f438": {
+          "description": "Stash a Cultist knife at the river village marked circle on Woods"
+        }
+      }
     }
   },
   "editions": {
@@ -1224,7 +1234,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-01-05T21:57:46.760Z",
-    "sha256": "c2afd9424a7d24aa60daeacb5358d73302158f7f18bdcbc04cb7150aea4c29bb"
+    "generated": "2026-01-07T08:26:58.636Z",
+    "sha256": "491e1797a4e9223075346cc444431227fae431d8a371493fb008f5eaa50233cd"
   }
 }
