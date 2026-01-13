@@ -31,6 +31,8 @@ import {
   validateAllOverrides,
   categorizeResults,
   type TaskOverride,
+  type TaskAddition,
+  type TaskData,
   type ValidationResult,
   type ValidationDetail,
 } from '../src/lib/index.js';
@@ -43,6 +45,29 @@ const { srcDir } = getProjectPaths(import.meta.url);
 function loadTaskOverrides(): Record<string, TaskOverride> {
   const filePath = join(srcDir, 'overrides', 'tasks.json5');
   return loadJson5File<Record<string, TaskOverride>>(filePath);
+}
+
+/**
+ * Load task additions from source file
+ */
+function loadTaskAdditions(): Record<string, TaskAddition> {
+  const filePath = join(srcDir, 'additions', 'tasksAdd.json5');
+  return loadJson5File<Record<string, TaskAddition>>(filePath);
+}
+
+type EditionData = {
+  id: string;
+  title?: string;
+  exclusiveTaskIds?: string[];
+  excludedTaskIds?: string[];
+};
+
+/**
+ * Load edition additions from source file
+ */
+function loadEditions(): Record<string, EditionData> {
+  const filePath = join(srcDir, 'additions', 'editions.json5');
+  return loadJson5File<Record<string, EditionData>>(filePath);
 }
 
 /**
@@ -89,6 +114,132 @@ function getDetailColor(status: ValidationDetail['status']): string {
     default:
       return colors.cyan;
   }
+}
+
+type AdditionStatus = 'RESOLVED' | 'MISSING' | 'CHECK';
+
+type AdditionResult = {
+  key: string;
+  name: string;
+  status: AdditionStatus;
+  message: string;
+};
+
+type EditionTaskReference = {
+  editionId: string;
+  editionTitle?: string;
+  taskId: string;
+  kind: 'exclusive' | 'excluded';
+};
+
+function normalizeWikiLink(link?: string): string | undefined {
+  if (!link) return undefined;
+  return link.trim().toLowerCase().replace(/\/$/, '');
+}
+
+function normalizeName(name: string): string {
+  return name.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function buildApiIndexes(apiTasks: TaskData[]) {
+  const byWikiLink = new Map<string, TaskData>();
+  const byName = new Map<string, TaskData[]>();
+
+  for (const task of apiTasks) {
+    const wikiKey = normalizeWikiLink(task.wikiLink);
+    if (wikiKey) {
+      byWikiLink.set(wikiKey, task);
+    }
+
+    const nameKey = normalizeName(task.name);
+    const matches = byName.get(nameKey) ?? [];
+    matches.push(task);
+    byName.set(nameKey, matches);
+  }
+
+  return { byWikiLink, byName };
+}
+
+function checkTaskAdditions(
+  additions: Record<string, TaskAddition>,
+  apiTasks: TaskData[]
+): AdditionResult[] {
+  const { byWikiLink, byName } = buildApiIndexes(apiTasks);
+
+  return Object.entries(additions).map(([key, addition]) => {
+    const wikiKey = normalizeWikiLink(addition.wikiLink);
+    const wikiMatch = wikiKey ? byWikiLink.get(wikiKey) : undefined;
+    if (wikiMatch) {
+      return {
+        key,
+        name: addition.name,
+        status: 'RESOLVED',
+        message: `Matched API task '${wikiMatch.name}' (${wikiMatch.id}) by wikiLink - RESOLVED`,
+      };
+    }
+
+    const nameKey = normalizeName(addition.name);
+    const nameMatches = byName.get(nameKey) ?? [];
+    if (nameMatches.length === 1) {
+      return {
+        key,
+        name: addition.name,
+        status: 'CHECK',
+        message: `Matched API task '${nameMatches[0].name}' (${nameMatches[0].id}) by name only - NEEDS REVIEW`,
+      };
+    }
+
+    if (nameMatches.length > 1) {
+      const ids = nameMatches.map((task) => task.id).join(', ');
+      return {
+        key,
+        name: addition.name,
+        status: 'CHECK',
+        message: `Multiple API tasks share this name (${ids}) - NEEDS REVIEW`,
+      };
+    }
+
+    return {
+      key,
+      name: addition.name,
+      status: 'MISSING',
+      message: 'Still missing from API - STILL NEEDED',
+    };
+  });
+}
+
+function checkEditionTaskReferences(
+  editions: Record<string, EditionData>,
+  apiTasks: TaskData[]
+): EditionTaskReference[] {
+  const apiTaskIds = new Set(apiTasks.map((task) => task.id));
+  const missing: EditionTaskReference[] = [];
+
+  for (const edition of Object.values(editions)) {
+    for (const taskId of edition.exclusiveTaskIds ?? []) {
+      if (!apiTaskIds.has(taskId)) {
+        missing.push({
+          editionId: edition.id,
+          editionTitle: edition.title,
+          taskId,
+          kind: 'exclusive',
+        });
+      }
+    }
+
+    for (const taskId of edition.excludedTaskIds ?? []) {
+      if (!apiTaskIds.has(taskId)) {
+        missing.push({
+          editionId: edition.id,
+          editionTitle: edition.title,
+          taskId,
+          kind: 'excluded',
+        });
+      }
+    }
+  }
+
+  return missing;
 }
 
 /**
@@ -177,6 +328,118 @@ function printResults(results: ValidationResult[]): void {
   }
 }
 
+function getAdditionIcon(status: AdditionStatus): string {
+  switch (status) {
+    case 'RESOLVED':
+      return icons.success;
+    case 'CHECK':
+      return icons.warning;
+    default:
+      return icons.warning;
+  }
+}
+
+function getAdditionColor(status: AdditionStatus): string {
+  switch (status) {
+    case 'RESOLVED':
+      return colors.green;
+    case 'CHECK':
+      return colors.yellow;
+    default:
+      return colors.yellow;
+  }
+}
+
+function printAdditionResults(results: AdditionResult[]): void {
+  printHeader('ADDITIONS CHECK');
+
+  for (const result of results) {
+    const icon = getAdditionIcon(result.status);
+    const color = getAdditionColor(result.status);
+    console.log(`${icon} ${bold(result.name)} ${dim(`(${result.key})`)}`);
+    console.log(`   ${color}${result.message}${colors.reset}`);
+    console.log();
+  }
+
+  const resolved = results.filter((r) => r.status === 'RESOLVED');
+  const missing = results.filter((r) => r.status === 'MISSING');
+  const review = results.filter((r) => r.status === 'CHECK');
+
+  printHeader('ADDITIONS SUMMARY');
+
+  console.log(
+    formatCountLabel(
+      `${icons.success} Resolved in API (remove from tasksAdd)`,
+      resolved.length,
+      'green'
+    )
+  );
+  if (resolved.length > 0) {
+    for (const r of resolved) {
+      console.log(`  - ${r.name} (${r.key})`);
+    }
+  } else {
+    console.log(`  ${dim('None')}`);
+  }
+  console.log();
+
+  console.log(
+    formatCountLabel(
+      `${icons.warning} Still missing from API`,
+      missing.length,
+      'yellow'
+    )
+  );
+  if (missing.length > 0) {
+    for (const r of missing) {
+      console.log(`  - ${r.name} (${r.key})`);
+    }
+  } else {
+    console.log(`  ${dim('None')}`);
+  }
+  console.log();
+
+  console.log(
+    formatCountLabel(
+      `${icons.sync} Needs review (name-only matches)`,
+      review.length,
+      'yellow'
+    )
+  );
+  if (review.length > 0) {
+    for (const r of review) {
+      console.log(`  - ${r.name} (${r.key})`);
+    }
+  } else {
+    console.log(`  ${dim('None')}`);
+  }
+  console.log();
+}
+
+function printEditionReferenceResults(missing: EditionTaskReference[]): void {
+  printHeader('EDITION EXCLUSIONS CHECK');
+
+  if (missing.length === 0) {
+    console.log(`${icons.success} All edition task references exist in API\n`);
+    return;
+  }
+
+  console.log(
+    formatCountLabel(
+      `${icons.warning} Missing edition task references (review)`,
+      missing.length,
+      'yellow'
+    )
+  );
+  for (const entry of missing) {
+    const title = entry.editionTitle ?? entry.editionId;
+    console.log(
+      `  - ${title} (${entry.editionId}) ${entry.kind} task ID ${entry.taskId}`
+    );
+  }
+  console.log();
+}
+
 /**
  * Main validation function
  */
@@ -187,6 +450,15 @@ async function main(): Promise<void> {
     const taskCount = Object.keys(overrides).length;
     printSuccess(`Found ${taskCount} task override(s)\n`);
 
+    printProgress('Loading task additions and editions...');
+    const additions = loadTaskAdditions();
+    const editions = loadEditions();
+    const additionsCount = Object.keys(additions).length;
+    const editionsCount = Object.keys(editions).length;
+    printSuccess(
+      `Found ${additionsCount} task addition(s) and ${editionsCount} edition(s)\n`
+    );
+
     printProgress('Fetching current data from tarkov.dev API...');
     const apiTasks = await fetchTasks();
     printSuccess(`Fetched ${apiTasks.length} tasks from API\n`);
@@ -195,6 +467,14 @@ async function main(): Promise<void> {
     const results = validateAllOverrides(overrides, apiTasks);
 
     printResults(results);
+
+    printProgress('Checking additions against API...\n');
+    const additionResults = checkTaskAdditions(additions, apiTasks);
+    printAdditionResults(additionResults);
+
+    printProgress('Checking edition exclusions against API...\n');
+    const missingEditionRefs = checkEditionTaskReferences(editions, apiTasks);
+    printEditionReferenceResults(missingEditionRefs);
 
     process.exit(0);
   } catch (error) {
