@@ -485,6 +485,9 @@
           "description": "Eliminate any target inside The Labyrinth (PvP: 24 kills / PvE: 36 kills)"
         }
       }
+    },
+    "6761ff17cdc36bd66102e9d0": {
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/New_Beginning_(Prestige_2)"
     }
   },
   "editions": {
@@ -918,7 +921,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-02-03T17:21:47.088Z",
-    "sha256": "bd9bef0ae633e1410983a0288cc201bd9f9142d90c4d76007428a80a43dcca46"
+    "generated": "2026-02-03T17:23:12.282Z",
+    "sha256": "b8ee4019fb1eeff6b70c450522b886c9ba02acb706370a4e5ebe5d019f2ca702"
   }
 }
