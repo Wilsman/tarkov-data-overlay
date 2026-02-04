@@ -481,6 +481,17 @@
         }
       }
     },
+    "6761f28a022f60bb320f3e95": {
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/New_Beginning_(Prestige_1)",
+      "objectives": {
+        "6848100b00afffa81f09e36b": {
+          "description": "Survive and extract from The Lab"
+        }
+      }
+    },
+    "6761ff17cdc36bd66102e9d0": {
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/New_Beginning_(Prestige_2)"
+    },
     "6848100b00afffa81f09e365": {
       "wikiLink": "https://escapefromtarkov.fandom.com/wiki/New_Beginning_(Prestige_3)",
       "objectives": {
@@ -521,17 +532,6 @@
           }
         ]
       }
-    },
-    "6761f28a022f60bb320f3e95": {
-      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/New_Beginning_(Prestige_1)",
-      "objectives": {
-        "6848100b00afffa81f09e36b": {
-          "description": "Survive and extract from The Lab"
-        }
-      }
-    },
-    "6761ff17cdc36bd66102e9d0": {
-      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/New_Beginning_(Prestige_2)"
     }
   },
   "editions": {
@@ -1165,7 +1165,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-02-04T10:06:47.375Z",
-    "sha256": "0be4bd7727518da80a18d632ec4286eac7a15e74006cfa55df00a0369635dd84"
+    "generated": "2026-02-04T10:20:26.376Z",
+    "sha256": "397e2857af795cc453e6f0aec5ef4b7caa5263127cc0eb0a6f0000ed97d80a27"
   }
 }
