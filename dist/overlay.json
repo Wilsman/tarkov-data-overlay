@@ -123,22 +123,13 @@
       "map": null,
       "objectives": {
         "63a5cf262964a7488f5243d1": {
-          "description": "Eliminate PMC operatives while using an MP5SD with PRO sight on Streets of Tarkov, Ground Zero or Interchange",
+          "description": "Eliminate PMC operatives while using an MP5SD on Streets of Tarkov, Ground Zero or Interchange",
           "usingWeapon": [
             {
               "id": "59411abb86f77478f702b5d2",
               "name": "HK MP5 9x19 submachine gun (Navy 3 Round Burst) SD",
               "shortName": "MP5 SD"
             }
-          ],
-          "usingWeaponMods": [
-            [
-              {
-                "id": "61659f79d92c473c770213ee",
-                "name": "Aimpoint PRO reflex sight",
-                "shortName": "PRO"
-              }
-            ]
           ],
           "maps": [
             {
@@ -300,10 +291,14 @@
     "66ab9da7eb102b9bcd08591c": {
       "objectives": {
         "66ab9da7eb102b9bcd08591d": {
-          "description": "Eliminate 5 Scavs on Lighthouse (In one raid)"
+          "description": "Eliminate 5 Scavs on Lighthouse (In one raid)",
+          "zones": [],
+          "zoneNames": []
         },
         "66ab9da7eb102b9bcd085922": {
-          "description": "Eliminate 5 Scavs on Shoreline (In one raid)"
+          "description": "Eliminate 5 Scavs on Shoreline (In one raid)",
+          "zones": [],
+          "zoneNames": []
         }
       }
     },
@@ -485,6 +480,17 @@
           "description": "Eliminate any target inside The Labyrinth (PvP: 24 kills / PvE: 36 kills)"
         }
       }
+    },
+    "6761f28a022f60bb320f3e95": {
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/New_Beginning_(Prestige_1)",
+      "objectives": {
+        "6848100b00afffa81f09e36b": {
+          "description": "Survive and extract from The Lab"
+        }
+      }
+    },
+    "6761ff17cdc36bd66102e9d0": {
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/New_Beginning_(Prestige_2)"
     }
   },
   "editions": {
@@ -914,11 +920,211 @@
           }
         ]
       }
+    },
+    "keepers_word": {
+      "id": "keepers_word",
+      "name": "Keeper's Word",
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/Keeper%27s_Word",
+      "trader": {
+        "id": "638f541a29ffd1183d187f57",
+        "name": "Lightkeeper"
+      },
+      "map": {
+        "id": "6733700029c367a3d40b02af",
+        "name": "The Labyrinth"
+      },
+      "kappaRequired": false,
+      "factionName": "Any",
+      "taskRequirements": [
+        {
+          "task": {
+            "id": "67a096ed77dd677f600804ba",
+            "name": "Sensory Analysis - Part 2"
+          },
+          "status": [
+            "complete"
+          ]
+        },
+        {
+          "task": {
+            "id": "67a0970f05d1611ed90be75d",
+            "name": "Hypotheses Testing"
+          },
+          "status": [
+            "complete"
+          ]
+        },
+        {
+          "task": {
+            "id": "67d03be712fb5f8fd2096332",
+            "name": "Vacate the Premises"
+          },
+          "status": [
+            "complete"
+          ]
+        },
+        {
+          "task": {
+            "id": "67a09724972c11a3f5077324",
+            "name": "Confidential Info"
+          },
+          "status": [
+            "complete"
+          ]
+        },
+        {
+          "task": {
+            "id": "67a097379f2068e74603c6ac",
+            "name": "Indisputable Authority"
+          },
+          "status": [
+            "complete"
+          ]
+        },
+        {
+          "task": {
+            "id": "67a0972e77dd677f600804bd",
+            "name": "This Tape Sucks"
+          },
+          "status": [
+            "complete"
+          ]
+        }
+      ],
+      "neededKeys": [
+        {
+          "map": {
+            "id": "6733700029c367a3d40b02af",
+            "name": "The Labyrinth"
+          },
+          "keys": [
+            {
+              "id": "679bab714e9ca6b3d80586b4",
+              "name": "Corpse room key",
+              "shortName": "Corpses"
+            }
+          ]
+        }
+      ],
+      "objectives": [
+        {
+          "id": "keepers_word_obj01",
+          "description": "Stash a Cultist knife at the first special place inside The Labyrinth",
+          "type": "plantItem",
+          "maps": [
+            {
+              "id": "6733700029c367a3d40b02af",
+              "name": "The Labyrinth"
+            }
+          ],
+          "items": [
+            {
+              "id": "5fc64ea372b0dd78d51159dc",
+              "name": "Cultist knife",
+              "shortName": "Knife"
+            }
+          ],
+          "count": 1
+        },
+        {
+          "id": "keepers_word_obj02",
+          "description": "Stash a Cultist knife at the second special place inside The Labyrinth",
+          "type": "plantItem",
+          "maps": [
+            {
+              "id": "6733700029c367a3d40b02af",
+              "name": "The Labyrinth"
+            }
+          ],
+          "items": [
+            {
+              "id": "5fc64ea372b0dd78d51159dc",
+              "name": "Cultist knife",
+              "shortName": "Knife"
+            }
+          ],
+          "count": 1
+        },
+        {
+          "id": "keepers_word_obj03",
+          "description": "Stash a Cultist knife at the third special place inside The Labyrinth",
+          "type": "plantItem",
+          "maps": [
+            {
+              "id": "6733700029c367a3d40b02af",
+              "name": "The Labyrinth"
+            }
+          ],
+          "requiredKeys": [
+            [
+              {
+                "id": "679bab714e9ca6b3d80586b4",
+                "name": "Corpse room key",
+                "shortName": "Corpses"
+              }
+            ]
+          ],
+          "items": [
+            {
+              "id": "5fc64ea372b0dd78d51159dc",
+              "name": "Cultist knife",
+              "shortName": "Knife"
+            }
+          ],
+          "count": 1
+        }
+      ],
+      "experience": 56800,
+      "finishRewards": {
+        "items": [
+          {
+            "count": 4830,
+            "item": {
+              "id": "5696686a4bdc2da3298b456a",
+              "name": "Dollars",
+              "shortName": "USD"
+            }
+          },
+          {
+            "count": 1,
+            "item": {
+              "id": "5c05308086f7746b2101e90b",
+              "name": "Virtex programmable processor",
+              "shortName": "Virtex"
+            }
+          },
+          {
+            "count": 1,
+            "item": {
+              "id": "5d235bb686f77443f4331278",
+              "name": "S I C C organizational pouch",
+              "shortName": "S I C C"
+            }
+          },
+          {
+            "count": 1,
+            "item": {
+              "id": "64d0b40fbe2eed70e254e2d4",
+              "name": "Sacred Amulet",
+              "shortName": "Amulet"
+            }
+          }
+        ],
+        "traderStanding": [
+          {
+            "trader": {
+              "id": "638f541a29ffd1183d187f57",
+              "name": "Lightkeeper"
+            },
+            "standing": 0.03
+          }
+        ]
+      }
     }
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-01-28T12:49:55.103Z",
-    "sha256": "2512771260ef6172d8ba3148e3c28be6f15066f141a0945a9cd0bf448ac28004"
+    "generated": "2026-02-04T09:38:18.270Z",
+    "sha256": "1ea85b80d315a4f1d339f7ac5dc97739c692132aeb8444e713d6256d03d17fc1"
   }
 }

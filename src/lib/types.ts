@@ -12,7 +12,6 @@ export interface TaskOverride {
   wikiLink?: string;
   disabled?: boolean;
   map?: { id: string; name: string } | null;
-  maps?: Array<{ id: string; name: string }>;
   kappaRequired?: boolean;
   lightkeeperRequired?: boolean;
   factionName?: string;
@@ -147,7 +146,6 @@ export interface TaskAddition {
   wikiLink: string;
   trader: { id?: string; name: string };
   map?: { id: string; name: string } | null;
-  maps?: Array<{ id: string; name: string }>;
   minPlayerLevel?: number;
   factionName?: string;
   requiredPrestige?: { id?: string; name: string; prestigeLevel: number };

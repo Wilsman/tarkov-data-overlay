@@ -176,28 +176,19 @@
     map: null, // Was: { id: "5714dc692459777137212e12", name: "Streets of Tarkov" }
     objectives: {
       '63a5cf262964a7488f5243d1': {
-        description: 'Eliminate PMC operatives while using an MP5SD with PRO sight on Streets of Tarkov, Ground Zero or Interchange',
+        description: 'Eliminate PMC operatives while using an MP5SD on Streets of Tarkov, Ground Zero or Interchange', // Was: Eliminate PMC operatives while using an SR-2M with a suppressor and KP-SR2 sight on Streets of Tarkov
         usingWeapon: [
           {
             id: '59411abb86f77478f702b5d2',
             name: 'HK MP5 9x19 submachine gun (Navy 3 Round Burst) SD',
             shortName: 'MP5 SD',
           },
-        ],
-        usingWeaponMods: [
-          [
-            {
-              id: '61659f79d92c473c770213ee',
-              name: 'Aimpoint PRO reflex sight',
-              shortName: 'PRO',
-            },
-          ],
-        ],
+        ], // Was: "id": "62e14904c2699c0ec93adc47", "name": "SR-2M Veresk 9x21 submachine gun", "shortName": "SR-2M"
         maps: [
           { id: '5714dc692459777137212e12', name: 'Streets of Tarkov' },
           { id: '653e6760052c01c1c805532f', name: 'Ground Zero' },
           { id: '5714dbc024597771384a510d', name: 'Interchange' },
-        ],
+        ], // Was: { id: '5714dc692459777137212e12', name: 'Streets of Tarkov' }
       },
     },
   },
@@ -358,9 +349,13 @@
     objectives: {
       '66ab9da7eb102b9bcd08591d': {
         description: 'Eliminate 5 Scavs on Lighthouse (In one raid)', // Was: Eliminate Scavs at the village on Lighthouse (In one raid)
+        zones: [], // Was: [{ id: "Marafon_kill_village_lighthouse", position: { x: -72.8853149, y: 5.777012, z: -286.249237 }, outline: [...] }]
+        zoneNames: [], // Was: ['Village']
       },
       '66ab9da7eb102b9bcd085922': {
         description: 'Eliminate 5 Scavs on Shoreline (In one raid)', // Was: Eliminate Scavs at the village on Shoreline (In one raid)
+        zones: [], // Was: [{ id: "marafon_kill_village_shoreline", position: { x: 377.300049, y: -54.42, z: 136.299988 }, outline: [...] }]
+        zoneNames: [], // Was: ['Village']
       },
     },
   },
@@ -597,4 +592,22 @@
       ],
     },
   },
+  // New Beginning (Prestige 1) - Wiki link and objective description incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/New_Beginning_(Prestige_1)
+  // tarkov.dev links to the disambiguation page; should link to the specific Prestige 1 page.
+  // tarkov.dev objective uses Lab -> Streets transit; wiki states surviving and extracting from The Lab instead.
+  '6761f28a022f60bb320f3e95': {
+    wikiLink: 'https://escapefromtarkov.fandom.com/wiki/New_Beginning_(Prestige_1)', // Was: https://escapefromtarkov.fandom.com/wiki/New_Beginning
+    objectives: {
+      '6848100b00afffa81f09e36b': {
+        description: 'Survive and extract from The Lab', // Was: "Use the transit from The Lab to Streets of Tarkov"
+      },
+    },
+  },
+  // New Beginning (Prestige 2) - Wiki link incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/New_Beginning_(Prestige_2)
+  // tarkov.dev links to the disambiguation page; should link to the specific Prestige 2 page.
+  '6761ff17cdc36bd66102e9d0': {
+    wikiLink: 'https://escapefromtarkov.fandom.com/wiki/New_Beginning_(Prestige_2)', // Was: https://escapefromtarkov.fandom.com/wiki/New_Beginning
+  }
 }
