@@ -192,7 +192,9 @@ Notes:
           ],
         ], // Optional | Console-only
         wearing: [
-          { id: "item-id-9", name: "Item Name 9", shortName: "Item Shortname 9" },
+          [
+            { id: "item-id-9", name: "Item Name 9", shortName: "Item Shortname 9" },
+          ],
         ], // Optional | Console-only
         notWearing: [
           { id: "item-id-10", name: "Item Name 10", shortName: "Item Shortname 10" },
@@ -406,7 +408,9 @@ Notes:
           ],
         ], // Optional | Console-only
         wearing: [
-          { id: "item-id-9", name: "Item Name 9", shortName: "Item Shortname 9" },
+          [
+            { id: "item-id-9", name: "Item Name 9", shortName: "Item Shortname 9" },
+          ],
         ], // Optional | Console-only
         notWearing: [
           { id: "item-id-10", name: "Item Name 10", shortName: "Item Shortname 10" },
