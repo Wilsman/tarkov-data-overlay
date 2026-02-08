@@ -645,5 +645,53 @@
   // Wiki task infobox shows reqkappa: No
   '59689fbd86f7740d137ebfc4': {
     kappaRequired: false, // Was: true
+  },
+
+  // Setup - Objective wearing gear variants missing
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Setup
+  // Wiki Guide section lists additional valid hats and chest rigs for objective progress.
+  '5c1234c286f77406fa13baeb': {
+    objectives: {
+      '5c1fa9c986f7740de474cb3d': {
+        wearing: [
+          [
+            { id: '572b7adb24597762ae139821', name: 'Scav Vest', shortName: 'Scav Vest' },
+            { id: '59e7708286f7742cbd762753', name: 'Ushanka ear flap hat', shortName: 'Ushanka' },
+          ],
+          [
+            { id: '572b7adb24597762ae139821', name: 'Scav Vest', shortName: 'Scav Vest' },
+            { id: '6937f02dfd6488bb27024839', name: 'Domontovich ushanka hat', shortName: 'Domont' },
+          ],
+          [
+            { id: '572b7adb24597762ae139821', name: 'Scav Vest', shortName: 'Scav Vest' },
+            { id: '6937efd50543dcc2560a2c81', name: 'New Year ushanka hat', shortName: 'Ushanka' },
+          ],
+          [
+            { id: '693fd1200ec97e98040bd3f9', name: 'Tac-Kek JayPC plate carrier (Black)', shortName: 'JayPC' },
+            { id: '59e7708286f7742cbd762753', name: 'Ushanka ear flap hat', shortName: 'Ushanka' },
+          ],
+          [
+            { id: '693fd1200ec97e98040bd3f9', name: 'Tac-Kek JayPC plate carrier (Black)', shortName: 'JayPC' },
+            { id: '6937f02dfd6488bb27024839', name: 'Domontovich ushanka hat', shortName: 'Domont' },
+          ],
+          [
+            { id: '693fd1200ec97e98040bd3f9', name: 'Tac-Kek JayPC plate carrier (Black)', shortName: 'JayPC' },
+            { id: '6937efd50543dcc2560a2c81', name: 'New Year ushanka hat', shortName: 'Ushanka' },
+          ],
+          [
+            { id: '693fd13aa490096a05028cc8', name: 'Tac-Kek JayPC plate carrier (OD Green)', shortName: 'JayPC' },
+            { id: '59e7708286f7742cbd762753', name: 'Ushanka ear flap hat', shortName: 'Ushanka' },
+          ],
+          [
+            { id: '693fd13aa490096a05028cc8', name: 'Tac-Kek JayPC plate carrier (OD Green)', shortName: 'JayPC' },
+            { id: '6937f02dfd6488bb27024839', name: 'Domontovich ushanka hat', shortName: 'Domont' },
+          ],
+          [
+            { id: '693fd13aa490096a05028cc8', name: 'Tac-Kek JayPC plate carrier (OD Green)', shortName: 'JayPC' },
+            { id: '6937efd50543dcc2560a2c81', name: 'New Year ushanka hat', shortName: 'Ushanka' },
+          ],
+        ], // Was: [[{ id: '572b7adb24597762ae139821', name: 'Scav Vest', shortName: 'Scav Vest' }, { id: '59e7708286f7742cbd762753', name: 'Ushanka ear flap hat', shortName: 'Ushanka' }]]
+      },
+    },
   }
 }
