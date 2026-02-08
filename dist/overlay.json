@@ -723,42 +723,60 @@
           "description": "Eliminate 15 PMC operatives while using an active headset without wearing any armor",
           "type": "shoot",
           "wearing": [
-            {
-              "id": "5b432b965acfc47a8774094e",
-              "name": "GSSh-01 active headset"
-            },
-            {
-              "id": "5aa2ba71e5b5b000137b758f",
-              "name": "MSA Sordin Supreme PRO-X/L headset"
-            },
-            {
-              "id": "6033fa48ffd42c541047f728",
-              "name": "OPSMEN Earmor M32 headset"
-            },
-            {
-              "id": "5a16b9fffcdbcb0176308b34",
-              "name": "Ops-Core FAST RAC Headset"
-            },
-            {
-              "id": "5645bcc04bdc2d363b8b4572",
-              "name": "Peltor ComTac II headset (OD Green)"
-            },
-            {
-              "id": "628e4e576d783146b124c64d",
-              "name": "Peltor ComTac IV Hybrid headset (Coyote Brown)"
-            },
-            {
-              "id": "5c165d832e2216398b5a7e36",
-              "name": "Peltor Tactical Sport headset"
-            },
-            {
-              "id": "5e4d34ca86f774264f758330",
-              "name": "Walker's Razor Digital headset"
-            },
-            {
-              "id": "5f60cd6cf2bcbb675b00dac6",
-              "name": "Walker's XCEL 500BT Digital headset"
-            }
+            [
+              {
+                "id": "5b432b965acfc47a8774094e",
+                "name": "GSSh-01 active headset"
+              }
+            ],
+            [
+              {
+                "id": "5aa2ba71e5b5b000137b758f",
+                "name": "MSA Sordin Supreme PRO-X/L headset"
+              }
+            ],
+            [
+              {
+                "id": "6033fa48ffd42c541047f728",
+                "name": "OPSMEN Earmor M32 headset"
+              }
+            ],
+            [
+              {
+                "id": "5a16b9fffcdbcb0176308b34",
+                "name": "Ops-Core FAST RAC Headset"
+              }
+            ],
+            [
+              {
+                "id": "5645bcc04bdc2d363b8b4572",
+                "name": "Peltor ComTac II headset (OD Green)"
+              }
+            ],
+            [
+              {
+                "id": "628e4e576d783146b124c64d",
+                "name": "Peltor ComTac IV Hybrid headset (Coyote Brown)"
+              }
+            ],
+            [
+              {
+                "id": "5c165d832e2216398b5a7e36",
+                "name": "Peltor Tactical Sport headset"
+              }
+            ],
+            [
+              {
+                "id": "5e4d34ca86f774264f758330",
+                "name": "Walker's Razor Digital headset"
+              }
+            ],
+            [
+              {
+                "id": "5f60cd6cf2bcbb675b00dac6",
+                "name": "Walker's XCEL 500BT Digital headset"
+              }
+            ]
           ],
           "count": 15
         },
@@ -767,10 +785,12 @@
           "description": "Eliminate 15 PMC operatives while wearing the TSh-4M-L soft tank crew helmet without wearing any active headset",
           "type": "shoot",
           "wearing": [
-            {
-              "id": "5df8a58286f77412631087ed",
-              "name": "TSh-4M-L soft tank crew helmet"
-            }
+            [
+              {
+                "id": "5df8a58286f77412631087ed",
+                "name": "TSh-4M-L soft tank crew helmet"
+              }
+            ]
           ],
           "notWearing": [
             {
@@ -1865,7 +1885,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-02-08T06:00:48.127Z",
-    "sha256": "061a614af903d35f4ad0ad3d03d0ada0fd3398a27b40a7c5be8a13180bc7c4d8"
+    "generated": "2026-02-08T06:02:33.758Z",
+    "sha256": "b660b4474f10ab5fd7ac58100248bca6308169cbc2e27023bcfaf4d5473ab850"
   }
 }
