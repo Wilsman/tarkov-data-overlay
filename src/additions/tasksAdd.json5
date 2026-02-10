@@ -987,9 +987,10 @@
     objectives: [
       {
         id: 'goals_and_means_obj01',
-        description: 'Eliminate 20 PMC operatives from over 100 meters away while using any 9x39 caliber weapon',
+        description: 'Eliminate 20 PMC operatives from over 50 meters away while using any 9x39 caliber weapon', // Was: Eliminate 20 PMC operatives from over 100 meters away while using any 9x39 caliber weapon
         type: 'shoot',
         count: 20,
+        distance: 50, // Was: 100
         usingWeapon: [
           {
             id: '57c44b372459772d2b39b8ce',
