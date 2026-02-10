@@ -2013,11 +2013,155 @@
           }
         ]
       }
+    },
+    "duck_hunt": {
+      "id": "duck_hunt",
+      "name": "Duck Hunt",
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/Duck_Hunt",
+      "trader": {
+        "id": "5c0647fdd443bc2504c2d371",
+        "name": "Jaeger"
+      },
+      "kappaRequired": false,
+      "minPlayerLevel": 5,
+      "factionName": "Any",
+      "taskRequirements": [],
+      "objectives": [
+        {
+          "id": "duck_hunt_obj01",
+          "description": "Locate and shoot down all the toy ducks on Customs",
+          "type": "shoot",
+          "maps": [
+            {
+              "id": "56f40101d2720b2a4d8b45d6",
+              "name": "Customs"
+            }
+          ],
+          "count": 10
+        },
+        {
+          "id": "duck_hunt_obj02",
+          "description": "Locate and shoot down all the toy ducks on Shoreline",
+          "type": "shoot",
+          "maps": [
+            {
+              "id": "5704e554d2720bac5b8b456e",
+              "name": "Shoreline"
+            }
+          ],
+          "count": 10
+        },
+        {
+          "id": "duck_hunt_obj03",
+          "description": "Locate and shoot down all the toy ducks on Factory",
+          "type": "shoot",
+          "maps": [
+            {
+              "id": "55f2d3fd4bdc2d5f408b4567",
+              "name": "Factory"
+            }
+          ],
+          "count": 9
+        },
+        {
+          "id": "duck_hunt_obj04",
+          "description": "Locate and shoot down all the toy ducks on Woods",
+          "type": "shoot",
+          "maps": [
+            {
+              "id": "5704e3c2d2720bac5b8b4567",
+              "name": "Woods"
+            }
+          ],
+          "count": 10
+        },
+        {
+          "id": "duck_hunt_obj05",
+          "description": "Locate and shoot down all the toy ducks on Ground Zero",
+          "type": "shoot",
+          "maps": [
+            {
+              "id": "653e6760052c01c1c805532f",
+              "name": "Ground Zero"
+            }
+          ],
+          "count": 10
+        },
+        {
+          "id": "duck_hunt_obj06",
+          "description": "Locate and shoot down all the toy ducks on Interchange",
+          "type": "shoot",
+          "maps": [
+            {
+              "id": "5714dbc024597771384a510d",
+              "name": "Interchange"
+            }
+          ],
+          "count": 10
+        },
+        {
+          "id": "duck_hunt_obj07",
+          "description": "Locate and shoot down all the toy ducks on Reserve",
+          "type": "shoot",
+          "maps": [
+            {
+              "id": "5704e5fad2720bc05b8b4567",
+              "name": "Reserve"
+            }
+          ],
+          "count": 10
+        },
+        {
+          "id": "duck_hunt_obj08",
+          "description": "Hand over the item: Can of duck pate",
+          "type": "giveItem",
+          "items": [
+            {
+              "id": "can_of_duck_pate",
+              "name": "Can of duck pate"
+            }
+          ],
+          "foundInRaid": false,
+          "count": 15
+        }
+      ],
+      "experience": 25000,
+      "finishRewards": {
+        "items": [
+          {
+            "count": 345234,
+            "item": {
+              "id": "5449016a4bdc2d6f028b456f",
+              "name": "Roubles",
+              "shortName": "RUB"
+            }
+          }
+        ],
+        "traderStanding": [
+          {
+            "trader": {
+              "id": "5c0647fdd443bc2504c2d371",
+              "name": "Jaeger"
+            },
+            "standing": 0.03
+          }
+        ],
+        "skillLevelReward": [
+          {
+            "name": "Perception",
+            "level": 0.04,
+            "skill": {
+              "id": "Perception",
+              "name": "Perception"
+            }
+          }
+        ]
+      }
     }
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-02-10T14:00:14.972Z",
-    "sha256": "11502ad1d68a1a4321a6afdb3c6a28045dbfa43b1709463f8b47ea0ffb1ff2fe"
+    "generated": "2026-02-10T18:54:56.843Z",
+    "sha256": "afc57374c2fbf7de91020f6fb8670ebb853b75560d59588d42d6fd281420933b"
   }
 }
