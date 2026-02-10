@@ -693,5 +693,16 @@
         ], // Was: [[{ id: '572b7adb24597762ae139821', name: 'Scav Vest', shortName: 'Scav Vest' }, { id: '59e7708286f7742cbd762753', name: 'Ushanka ear flap hat', shortName: 'Ushanka' }]]
       },
     },
+  },
+  // Hunting Trip - Minimum distance requirement incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Hunting_Trip
+  // tarkov.dev currently shows 75m minimum distance; latest update reduces to 40m.
+  '5d25e4ca86f77409dd5cdf2c': {
+    objectives: {
+      '5fd8aa3206fb3a6b8154a2c3': {
+        description: 'Locate and neutralize Shturman with a headshot from over 40 meters away while using an M700 sniper rifle with the specified scope', // Was: Locate and neutralize Shturman with a headshot from over 75 meters away while using an M700 sniper rifle with the specified scope
+        distance: 40, // Was: 75
+      },
+    },
   }
 }
