@@ -32,6 +32,9 @@
       "description": "Item corrections",
       "type": "object"
     },
+    "itemsAdd": {
+      "$ref": "item-additions.schema.json"
+    },
     "tasks": {
       "$ref": "task-override.schema.json"
     },

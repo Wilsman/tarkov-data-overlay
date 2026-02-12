@@ -1,0 +1,19 @@
+{
+  // Duck items
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Duck_Hunt
+
+  can_of_duck_pate: {
+    id: '69774bb0a247161ff1068335',
+    name: 'Can of Duck pate',
+  },
+
+  duckov_poster: {
+    id: '697cdbfd14e9320980057487',
+    name: 'Duckov poster',
+  },
+
+  duck_figurine: {
+    id: '697cddb414e932098005748d',
+    name: 'Duck Figurine',
+  },
+}
