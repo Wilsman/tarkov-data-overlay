@@ -15,7 +15,7 @@ import { fileURLToPath } from 'url';
  * Uses the library location as anchor to find project root,
  * regardless of which script imports it.
  */
-export function getProjectPaths(_importMetaUrl?: string) {
+export function getProjectPaths() {
   // Use this file's location as the anchor - it's always in src/lib/
   const libDir = dirname(fileURLToPath(import.meta.url));
   const srcDir = join(libDir, '..');
@@ -66,6 +66,10 @@ export function loadAllJson5FromDir(
   for (const file of listJson5Files(dirPath)) {
     const filePath = join(dirPath, file);
     const data = loadJson5File(filePath);
+
+    if (data === null || typeof data !== 'object' || Array.isArray(data)) {
+      throw new Error(`Expected an object in ${filePath}, got ${Array.isArray(data) ? 'array' : typeof data}`);
+    }
 
     if (skipEmpty && Object.keys(data).length === 0) continue;
 

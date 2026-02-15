@@ -15,7 +15,7 @@ import {
   type OverlayOutput,
 } from '../src/lib/index.js';
 
-const { rootDir, srcDir, distDir } = getProjectPaths(import.meta.url);
+const { rootDir, srcDir, distDir } = getProjectPaths();
 
 /**
  * Load all source files from overrides and additions directories
@@ -59,13 +59,12 @@ function build(): void {
     },
   };
 
-  // Generate JSON output (without sha256 first)
+  // Generate JSON output without sha256 field, then hash it.
+  // To verify: parse overlay.json, delete $meta.sha256, re-serialize
+  // with JSON.stringify(obj, null, 2), and compare SHA-256 of that string.
   const jsonContent = JSON.stringify(output, null, 2);
-
-  // Add sha256 of the data (excluding $meta.sha256)
   output.$meta.sha256 = generateSha256(jsonContent);
 
-  // Final output with sha256
   const finalContent = JSON.stringify(output, null, 2);
 
   // Ensure dist directory exists

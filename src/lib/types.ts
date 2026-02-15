@@ -272,4 +272,5 @@ export const SCHEMA_CONFIGS: SchemaConfig[] = [
   { pattern: "tasksAdd.json5", schemaFile: "task-additions.schema.json" },
   { pattern: "editions.json5", schemaFile: "edition.schema.json" },
   { pattern: "storyChapters.json5", schemaFile: "story-chapter.schema.json" },
+  { pattern: "itemsAdd.json5", schemaFile: "item-additions.schema.json" },
 ];

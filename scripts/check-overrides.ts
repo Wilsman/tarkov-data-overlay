@@ -37,7 +37,7 @@ import {
   type ValidationDetail,
 } from '../src/lib/index.js';
 
-const { srcDir } = getProjectPaths(import.meta.url);
+const { srcDir } = getProjectPaths();
 
 /**
  * Load task overrides from source file

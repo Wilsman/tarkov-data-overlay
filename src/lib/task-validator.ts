@@ -266,6 +266,7 @@ const FIELD_VALIDATORS: FieldValidator[] = [
   createFieldValidator('kappaRequired'),
   createFieldValidator('lightkeeperRequired'),
   validateTaskRequirements,
+  createFieldValidator('traderRequirements'),
 ];
 
 /**

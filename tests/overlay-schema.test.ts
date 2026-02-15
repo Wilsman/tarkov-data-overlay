@@ -13,7 +13,7 @@ import {
 } from '../src/lib/index.js';
 
 function buildOverlayFixture(): OverlayOutput {
-  const { srcDir } = getProjectPaths(import.meta.url);
+  const { srcDir } = getProjectPaths();
   const overrides = loadAllJson5FromDir(join(srcDir, 'overrides'));
   const additions = loadAllJson5FromDir(join(srcDir, 'additions'), false);
 
@@ -29,7 +29,7 @@ function buildOverlayFixture(): OverlayOutput {
 
 describe('overlay.schema.json', () => {
   it('includes storyChapters in root properties', () => {
-    const { schemasDir } = getProjectPaths(import.meta.url);
+    const { schemasDir } = getProjectPaths();
     const rootSchema = loadJsonFile(
       join(schemasDir, 'overlay.schema.json')
     ) as { properties?: Record<string, unknown> };
@@ -38,7 +38,7 @@ describe('overlay.schema.json', () => {
   });
 
   it('validates generated overlay output', () => {
-    const { schemasDir } = getProjectPaths(import.meta.url);
+    const { schemasDir } = getProjectPaths();
     const ajv = new Ajv({
       allErrors: true,
       strict: false,

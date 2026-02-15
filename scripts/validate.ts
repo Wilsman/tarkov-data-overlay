@@ -16,7 +16,7 @@ import {
   type SchemaValidationResult,
 } from '../src/lib/index.js';
 
-const { srcDir, schemasDir } = getProjectPaths(import.meta.url);
+const { srcDir, schemasDir } = getProjectPaths();
 
 /** Compiled schema validators cache */
 type ValidatorCache = Map<string, ReturnType<Ajv['compile']>>;

@@ -14,7 +14,7 @@ import {
 
 describe('getProjectPaths', () => {
   it('returns valid project paths', () => {
-    const paths = getProjectPaths(import.meta.url);
+    const paths = getProjectPaths();
 
     expect(paths.rootDir).toContain('tarkov-data-overlay');
     expect(paths.srcDir).toContain('src');
@@ -25,7 +25,7 @@ describe('getProjectPaths', () => {
 
 describe('loadJson5File', () => {
   it('loads and parses JSON5 files', () => {
-    const paths = getProjectPaths(import.meta.url);
+    const paths = getProjectPaths();
     const editionsPath = join(paths.srcDir, 'additions', 'editions.json5');
 
     const data = loadJson5File(editionsPath);
@@ -35,7 +35,7 @@ describe('loadJson5File', () => {
   });
 
   it('handles JSON5 comments', () => {
-    const paths = getProjectPaths(import.meta.url);
+    const paths = getProjectPaths();
     const tasksPath = join(paths.srcDir, 'overrides', 'tasks.json5');
 
     const data = loadJson5File(tasksPath);
@@ -51,7 +51,7 @@ describe('loadJson5File', () => {
 
 describe('loadJsonFile', () => {
   it('loads and parses JSON files', () => {
-    const paths = getProjectPaths(import.meta.url);
+    const paths = getProjectPaths();
     const schemaPath = join(paths.schemasDir, 'edition.schema.json');
 
     const schema = loadJsonFile(schemaPath);
@@ -63,7 +63,7 @@ describe('loadJsonFile', () => {
 
 describe('listJson5Files', () => {
   it('lists JSON5 files in overrides directory', () => {
-    const paths = getProjectPaths(import.meta.url);
+    const paths = getProjectPaths();
     const overridesDir = join(paths.srcDir, 'overrides');
 
     const files = listJson5Files(overridesDir);
@@ -73,7 +73,7 @@ describe('listJson5Files', () => {
   });
 
   it('lists JSON5 files in additions directory', () => {
-    const paths = getProjectPaths(import.meta.url);
+    const paths = getProjectPaths();
     const additionsDir = join(paths.srcDir, 'additions');
 
     const files = listJson5Files(additionsDir);
@@ -90,7 +90,7 @@ describe('listJson5Files', () => {
 
 describe('loadAllJson5FromDir', () => {
   it('loads all JSON5 files from a directory', () => {
-    const paths = getProjectPaths(import.meta.url);
+    const paths = getProjectPaths();
     const additionsDir = join(paths.srcDir, 'additions');
 
     const data = loadAllJson5FromDir(additionsDir, false);
@@ -100,7 +100,7 @@ describe('loadAllJson5FromDir', () => {
   });
 
   it('skips empty files when skipEmpty is true', () => {
-    const paths = getProjectPaths(import.meta.url);
+    const paths = getProjectPaths();
     const overridesDir = join(paths.srcDir, 'overrides');
 
     const data = loadAllJson5FromDir(overridesDir, true);

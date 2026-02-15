@@ -39,6 +39,7 @@ const TASKS_QUERY = `
           name
         }
         value
+        compareMethod
       }
       factionName
       requiredPrestige {
