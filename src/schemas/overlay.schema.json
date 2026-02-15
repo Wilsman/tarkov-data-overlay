@@ -35,6 +35,9 @@
     "itemsAdd": {
       "$ref": "item-additions.schema.json"
     },
+    "storyChapters": {
+      "$ref": "story-chapter.schema.json"
+    },
     "tasks": {
       "$ref": "task-override.schema.json"
     },

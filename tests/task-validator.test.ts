@@ -553,6 +553,54 @@ describe('validateTaskOverride', () => {
     });
   });
 
+  describe('kappaRequired validation', () => {
+    it('returns FIXED when kappaRequired matches API', () => {
+      const apiTask = createApiTask({ kappaRequired: false });
+      const override: TaskOverride = { kappaRequired: false };
+      const result = validateTaskOverride('test-task-id', override, [apiTask]);
+
+      expect(
+        result.details.some((d) => d.field === 'kappaRequired' && d.status === 'fixed')
+      ).toBe(true);
+    });
+
+    it('returns NEEDED when kappaRequired differs from API', () => {
+      const apiTask = createApiTask({ kappaRequired: true });
+      const override: TaskOverride = { kappaRequired: false };
+      const result = validateTaskOverride('test-task-id', override, [apiTask]);
+
+      expect(
+        result.details.some((d) => d.field === 'kappaRequired' && d.status === 'needed')
+      ).toBe(true);
+    });
+  });
+
+  describe('lightkeeperRequired validation', () => {
+    it('returns FIXED when lightkeeperRequired matches API', () => {
+      const apiTask = createApiTask({ lightkeeperRequired: false });
+      const override: TaskOverride = { lightkeeperRequired: false };
+      const result = validateTaskOverride('test-task-id', override, [apiTask]);
+
+      expect(
+        result.details.some(
+          (d) => d.field === 'lightkeeperRequired' && d.status === 'fixed'
+        )
+      ).toBe(true);
+    });
+
+    it('returns NEEDED when lightkeeperRequired differs from API', () => {
+      const apiTask = createApiTask({ lightkeeperRequired: false });
+      const override: TaskOverride = { lightkeeperRequired: true };
+      const result = validateTaskOverride('test-task-id', override, [apiTask]);
+
+      expect(
+        result.details.some(
+          (d) => d.field === 'lightkeeperRequired' && d.status === 'needed'
+        )
+      ).toBe(true);
+    });
+  });
+
   describe('multiple field validation', () => {
     it('returns NEEDED if any field still needs override', () => {
       const override: TaskOverride = {

@@ -1,0 +1,96 @@
+{
+  "$id": "story-chapter.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Story Chapter",
+  "description": "Schema for story chapter data in tarkov-data-overlay",
+  "type": "object",
+  "additionalProperties": {
+    "type": "object",
+    "required": [
+      "id",
+      "name",
+      "normalizedName",
+      "wikiLink",
+      "order"
+    ],
+    "properties": {
+      "id": {
+        "description": "Unique identifier for the story chapter",
+        "type": "string"
+      },
+      "name": {
+        "description": "Display name of the story chapter",
+        "type": "string"
+      },
+      "normalizedName": {
+        "description": "URL-friendly normalized name",
+        "type": "string"
+      },
+      "wikiLink": {
+        "description": "Link to the official wiki page",
+        "type": "string"
+      },
+      "order": {
+        "description": "Sequential display order (1-based)",
+        "type": "integer",
+        "minimum": 1
+      },
+      "autoStart": {
+        "description": "Whether the chapter starts automatically (true) or must be discovered in-world (false)",
+        "type": "boolean"
+      },
+      "chapterRequirements": {
+        "description": "Story chapters that must be completed before this one becomes available",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["id", "name"],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "mapUnlocks": {
+        "description": "Maps unlocked by completing this chapter (tarkov.dev map IDs)",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["id", "name"],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "traderUnlocks": {
+        "description": "Traders unlocked by progressing through this chapter (tarkov.dev trader IDs)",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["id", "name"],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "additionalProperties": true
+  }
+}

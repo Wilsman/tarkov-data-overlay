@@ -19,6 +19,8 @@ const TASKS_QUERY = `
       name
       minPlayerLevel
       wikiLink
+      kappaRequired
+      lightkeeperRequired
       map {
         id
         name

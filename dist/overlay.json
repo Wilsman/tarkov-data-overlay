@@ -828,6 +828,180 @@
     }
   },
   "itemsAdd": {},
+  "storyChapters": {
+    "tour": {
+      "id": "tour",
+      "name": "Tour",
+      "normalizedName": "tour",
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/Tour",
+      "order": 1,
+      "autoStart": true,
+      "chapterRequirements": [],
+      "mapUnlocks": [
+        {
+          "id": "5714dc692459777137212e12",
+          "name": "Streets of Tarkov"
+        },
+        {
+          "id": "5714dbc024597771384a510d",
+          "name": "Interchange"
+        },
+        {
+          "id": "56f40101d2720b2a4d8b45d6",
+          "name": "Customs"
+        },
+        {
+          "id": "55f2d3fd4bdc2d5f408b4567",
+          "name": "Factory"
+        },
+        {
+          "id": "5704e3c2d2720bac5b8b4567",
+          "name": "Woods"
+        },
+        {
+          "id": "5704e554d2720bac5b8b456e",
+          "name": "Shoreline"
+        },
+        {
+          "id": "5704e5fad2720bc05b8b4567",
+          "name": "Reserve"
+        },
+        {
+          "id": "5b0fc42d86f7744a585f9105",
+          "name": "The Lab"
+        },
+        {
+          "id": "5704e4dad2720bb55b8b4567",
+          "name": "Lighthouse"
+        }
+      ],
+      "traderUnlocks": [
+        {
+          "id": "5ac3b934156ae10c4430e83c",
+          "name": "Ragman"
+        },
+        {
+          "id": "58330581ace78e27b8b10cee",
+          "name": "Skier"
+        },
+        {
+          "id": "54cb50c76803fa8b248b4571",
+          "name": "Prapor"
+        },
+        {
+          "id": "5a7c2eca46aef81a7ca2145d",
+          "name": "Mechanic"
+        },
+        {
+          "id": "5935c25fb3acc3127c3d8cd9",
+          "name": "Peacekeeper"
+        }
+      ]
+    },
+    "falling-skies": {
+      "id": "falling-skies",
+      "name": "Falling Skies",
+      "normalizedName": "falling-skies",
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/Falling_Skies",
+      "order": 2,
+      "autoStart": false,
+      "chapterRequirements": [
+        {
+          "id": "tour",
+          "name": "Tour"
+        }
+      ],
+      "mapUnlocks": [],
+      "traderUnlocks": []
+    },
+    "batya": {
+      "id": "batya",
+      "name": "Batya",
+      "normalizedName": "batya",
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/Batya",
+      "order": 3,
+      "autoStart": false,
+      "chapterRequirements": [],
+      "mapUnlocks": [],
+      "traderUnlocks": []
+    },
+    "the-unheard": {
+      "id": "the-unheard",
+      "name": "The Unheard",
+      "normalizedName": "the-unheard",
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/The_Unheard_(quest)",
+      "order": 4,
+      "autoStart": false,
+      "chapterRequirements": [],
+      "mapUnlocks": [],
+      "traderUnlocks": []
+    },
+    "blue-fire": {
+      "id": "blue-fire",
+      "name": "Blue Fire",
+      "normalizedName": "blue-fire",
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/Blue_Fire",
+      "order": 5,
+      "autoStart": false,
+      "chapterRequirements": [],
+      "mapUnlocks": [],
+      "traderUnlocks": []
+    },
+    "they-are-already-here": {
+      "id": "they-are-already-here",
+      "name": "They Are Already Here",
+      "normalizedName": "they-are-already-here",
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/They_Are_Already_Here",
+      "order": 6,
+      "autoStart": false,
+      "chapterRequirements": [],
+      "mapUnlocks": [],
+      "traderUnlocks": []
+    },
+    "accidental-witness": {
+      "id": "accidental-witness",
+      "name": "Accidental Witness",
+      "normalizedName": "accidental-witness",
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/Accidental_Witness",
+      "order": 7,
+      "autoStart": false,
+      "chapterRequirements": [],
+      "mapUnlocks": [],
+      "traderUnlocks": []
+    },
+    "the-labyrinth": {
+      "id": "the-labyrinth",
+      "name": "The Labyrinth",
+      "normalizedName": "the-labyrinth",
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/The_Labyrinth_(quest)",
+      "order": 8,
+      "autoStart": false,
+      "chapterRequirements": [],
+      "mapUnlocks": [
+        {
+          "id": "6733700029c367a3d40b02af",
+          "name": "The Labyrinth"
+        }
+      ],
+      "traderUnlocks": []
+    },
+    "the-ticket": {
+      "id": "the-ticket",
+      "name": "The Ticket",
+      "normalizedName": "the-ticket",
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/The_Ticket",
+      "order": 9,
+      "autoStart": false,
+      "chapterRequirements": [
+        {
+          "id": "falling-skies",
+          "name": "Falling Skies"
+        }
+      ],
+      "mapUnlocks": [],
+      "traderUnlocks": []
+    }
+  },
   "tasksAdd": {
     "setting_priorities": {
       "id": "setting_priorities",
@@ -2166,7 +2340,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-02-15T15:43:24.995Z",
-    "sha256": "5a9dc8010d4c27cac3482b1da9b3ef82ebb2873cc7c0001878f19e527a906c74"
+    "generated": "2026-02-15T17:22:35.021Z",
+    "sha256": "e24876e05b6db02e75f540ba589e5e1dfdf0153d5e5cf403a7eaac1d3619a3c1"
   }
 }

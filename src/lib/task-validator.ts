@@ -263,6 +263,8 @@ const FIELD_VALIDATORS: FieldValidator[] = [
   createFieldValidator('finishRewards'),
   createFieldValidator('factionName'),
   createFieldValidator('requiredPrestige'),
+  createFieldValidator('kappaRequired'),
+  createFieldValidator('lightkeeperRequired'),
   validateTaskRequirements,
 ];
 

@@ -180,6 +180,8 @@ export interface TaskData {
   minPlayerLevel?: number;
   wikiLink?: string;
   map?: { id: string; name: string } | null;
+  kappaRequired?: boolean;
+  lightkeeperRequired?: boolean;
   factionName?: string;
   requiredPrestige?: { id?: string; name: string; prestigeLevel: number };
   taskRequirements?: TaskRequirement[];
@@ -217,6 +219,19 @@ export interface ValidationDetail {
   message: string;
 }
 
+/** Story chapter structure for additions */
+export interface StoryChapter {
+  id: string;
+  name: string;
+  normalizedName: string;
+  wikiLink: string;
+  order: number;
+  autoStart?: boolean;
+  chapterRequirements?: Array<{ id: string; name: string }>;
+  mapUnlocks?: Array<{ id: string; name: string }>;
+  traderUnlocks?: Array<{ id: string; name: string }>;
+}
+
 /** Built overlay output structure */
 export interface OverlayOutput {
   tasks?: Record<string, TaskOverride>;
@@ -225,6 +240,7 @@ export interface OverlayOutput {
   traders?: Record<string, unknown>;
   hideout?: Record<string, unknown>;
   editions?: Record<string, unknown>;
+  storyChapters?: Record<string, StoryChapter>;
   $meta: OverlayMeta;
 }
 
@@ -255,4 +271,5 @@ export const SCHEMA_CONFIGS: SchemaConfig[] = [
   { pattern: "tasks.json5", schemaFile: "task-override.schema.json" },
   { pattern: "tasksAdd.json5", schemaFile: "task-additions.schema.json" },
   { pattern: "editions.json5", schemaFile: "edition.schema.json" },
+  { pattern: "storyChapters.json5", schemaFile: "story-chapter.schema.json" },
 ];

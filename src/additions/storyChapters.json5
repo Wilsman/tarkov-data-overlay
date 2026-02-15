@@ -1,0 +1,182 @@
+{
+  // Story Chapter data - not available in tarkov.dev API
+  // Source: In-game data and official Escape from Tarkov Wiki
+  //
+  // Story chapters are multi-stage quests introduced in Tarkov 1.0 that form
+  // the main narrative progression. They unlock maps, traders, and further chapters.
+  //
+  // Fields:
+  // - id: Unique identifier for the chapter
+  // - name: Display name
+  // - normalizedName: URL-friendly name
+  // - wikiLink: Official wiki page
+  // - order: Sequential display order
+  // - autoStart: Whether the chapter appears automatically or must be discovered
+  // - chapterRequirements: Chapters that must be completed first
+  // - mapUnlocks: Maps unlocked by progressing through this chapter
+  // - traderUnlocks: Traders unlocked by progressing through this chapter
+
+  // Tour
+  // The introductory story chapter, automatically available on game start.
+  // Progressing through Tour unlocks most maps and traders.
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Tour
+  tour: {
+    id: 'tour',
+    name: 'Tour',
+    normalizedName: 'tour',
+    wikiLink: 'https://escapefromtarkov.fandom.com/wiki/Tour',
+    order: 1,
+    autoStart: true,
+    chapterRequirements: [],
+    mapUnlocks: [
+      { id: '5714dc692459777137212e12', name: 'Streets of Tarkov' },
+      { id: '5714dbc024597771384a510d', name: 'Interchange' },
+      { id: '56f40101d2720b2a4d8b45d6', name: 'Customs' },
+      { id: '55f2d3fd4bdc2d5f408b4567', name: 'Factory' },
+      { id: '5704e3c2d2720bac5b8b4567', name: 'Woods' },
+      { id: '5704e554d2720bac5b8b456e', name: 'Shoreline' },
+      { id: '5704e5fad2720bc05b8b4567', name: 'Reserve' },
+      { id: '5b0fc42d86f7744a585f9105', name: 'The Lab' },
+      { id: '5704e4dad2720bb55b8b4567', name: 'Lighthouse' },
+    ],
+    traderUnlocks: [
+      { id: '5ac3b934156ae10c4430e83c', name: 'Ragman' },
+      { id: '58330581ace78e27b8b10cee', name: 'Skier' },
+      { id: '54cb50c76803fa8b248b4571', name: 'Prapor' },
+      { id: '5a7c2eca46aef81a7ca2145d', name: 'Mechanic' },
+      { id: '5935c25fb3acc3127c3d8cd9', name: 'Peacekeeper' },
+    ],
+  },
+
+  // Falling Skies
+  // Unlocked after completing Tour and all Mechanic objectives.
+  // Standard/Unheard editions also require Prapor loyalty level 2.
+  // Completing this chapter automatically unlocks The Ticket.
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Falling_Skies
+  'falling-skies': {
+    id: 'falling-skies',
+    name: 'Falling Skies',
+    normalizedName: 'falling-skies',
+    wikiLink: 'https://escapefromtarkov.fandom.com/wiki/Falling_Skies',
+    order: 2,
+    autoStart: false,
+    chapterRequirements: [
+      { id: 'tour', name: 'Tour' },
+    ],
+    mapUnlocks: [],
+    traderUnlocks: [],
+  },
+
+  // Batya
+  // Discovered by finding the Bogatyr Patch at the Customs power station.
+  // Involves investigating BEAR outposts across multiple maps.
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Batya
+  batya: {
+    id: 'batya',
+    name: 'Batya',
+    normalizedName: 'batya',
+    wikiLink: 'https://escapefromtarkov.fandom.com/wiki/Batya',
+    order: 3,
+    autoStart: false,
+    chapterRequirements: [],
+    mapUnlocks: [],
+    traderUnlocks: [],
+  },
+
+  // The Unheard
+  // Discovered by finding a note in the Cardinal Apartments eastern wing on Streets.
+  // Proof: https://escapefromtarkov.fandom.com/wiki/The_Unheard_(quest)
+  'the-unheard': {
+    id: 'the-unheard',
+    name: 'The Unheard',
+    normalizedName: 'the-unheard',
+    wikiLink: 'https://escapefromtarkov.fandom.com/wiki/The_Unheard_(quest)',
+    order: 4,
+    autoStart: false,
+    chapterRequirements: [],
+    mapUnlocks: [],
+    traderUnlocks: [],
+  },
+
+  // Blue Fire
+  // Discovered by finding a flyer at the Emercom Base BTR Stop on Woods.
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Blue_Fire
+  'blue-fire': {
+    id: 'blue-fire',
+    name: 'Blue Fire',
+    normalizedName: 'blue-fire',
+    wikiLink: 'https://escapefromtarkov.fandom.com/wiki/Blue_Fire',
+    order: 5,
+    autoStart: false,
+    chapterRequirements: [],
+    mapUnlocks: [],
+    traderUnlocks: [],
+  },
+
+  // They Are Already Here
+  // Discovered by finding a note near the cultist camp at Scout Tower on Shoreline,
+  // or obtained randomly by killing cultists.
+  // Proof: https://escapefromtarkov.fandom.com/wiki/They_Are_Already_Here
+  'they-are-already-here': {
+    id: 'they-are-already-here',
+    name: 'They Are Already Here',
+    normalizedName: 'they-are-already-here',
+    wikiLink: 'https://escapefromtarkov.fandom.com/wiki/They_Are_Already_Here',
+    order: 6,
+    autoStart: false,
+    chapterRequirements: [],
+    mapUnlocks: [],
+    traderUnlocks: [],
+  },
+
+  // Accidental Witness
+  // Discovered by investigating a spray-painted car in the Customs Dorms parking area.
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Accidental_Witness
+  'accidental-witness': {
+    id: 'accidental-witness',
+    name: 'Accidental Witness',
+    normalizedName: 'accidental-witness',
+    wikiLink: 'https://escapefromtarkov.fandom.com/wiki/Accidental_Witness',
+    order: 7,
+    autoStart: false,
+    chapterRequirements: [],
+    mapUnlocks: [],
+    traderUnlocks: [],
+  },
+
+  // The Labyrinth
+  // Requires the Knossos LLC facility key found in Admin Resort on Shoreline.
+  // Opens access to the underground Labyrinth map.
+  // Proof: https://escapefromtarkov.fandom.com/wiki/The_Labyrinth_(quest)
+  'the-labyrinth': {
+    id: 'the-labyrinth',
+    name: 'The Labyrinth',
+    normalizedName: 'the-labyrinth',
+    wikiLink: 'https://escapefromtarkov.fandom.com/wiki/The_Labyrinth_(quest)',
+    order: 8,
+    autoStart: false,
+    chapterRequirements: [],
+    mapUnlocks: [
+      { id: '6733700029c367a3d40b02af', name: 'The Labyrinth' },
+    ],
+    traderUnlocks: [],
+  },
+
+  // The Ticket
+  // Automatically unlocked upon completing Falling Skies.
+  // One of the final story chapters leading toward the game's endings.
+  // Proof: https://escapefromtarkov.fandom.com/wiki/The_Ticket
+  'the-ticket': {
+    id: 'the-ticket',
+    name: 'The Ticket',
+    normalizedName: 'the-ticket',
+    wikiLink: 'https://escapefromtarkov.fandom.com/wiki/The_Ticket',
+    order: 9,
+    autoStart: false,
+    chapterRequirements: [
+      { id: 'falling-skies', name: 'Falling Skies' },
+    ],
+    mapUnlocks: [],
+    traderUnlocks: [],
+  },
+}
