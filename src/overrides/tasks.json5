@@ -765,4 +765,10 @@
   '6573397ef3f8344c4575cd87': {
     experience: 6600, // Was: 11600
   },
+  // Beneath The Streets - Experience incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Beneath_The_Streets
+  // Wiki rewards show +24,000 EXP.
+  '66aba85403e0ee3101042877': {
+    experience: 24000, // Was: 46700
+  },
 }
