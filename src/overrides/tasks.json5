@@ -724,5 +724,15 @@
         count: 20, // Was: 50
       },
     },
-  }
+  },
+  // Our Own Land - Objective foundInRaid flag incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Our_Own_Land
+  // Wiki objective text explicitly states "found in raid" dogtags.
+  '6179b5b06e9dd54ac275e409': {
+    objectives: {
+      '6194fbf785a6d62c481a7aee': {
+        foundInRaid: true, // Was: false
+      },
+    },
+  },
 }
