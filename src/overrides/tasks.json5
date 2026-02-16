@@ -238,22 +238,11 @@
     },
   },
 
-  // Test Drive - Part 5 - Objective description/items and rewards incorrect
+  // Test Drive - Part 5 - Objective description/items and experience incorrect
   // Proof: https://escapefromtarkov.fandom.com/wiki/Test_Drive_-_Part_5
   // Recent wiki update (post-1.0); not verified in-game
   '669fa3a40c828825de06d6a1': {
     experience: 23000, // Was: 50000
-    finishRewards: {
-      items: [
-        {
-          item: {
-            id: '5449016a4bdc2d6f028b456f',
-            name: 'Roubles',
-          },
-          count: 500000, // Was: 520000
-        },
-      ],
-    },
     objectives: {
       '66a0f5a7f9eae6761253114c': {
         description: 'Eliminate any targets while using an SR-2M with suppressor and KP-SR2 sight on Factory',
