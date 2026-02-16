@@ -759,4 +759,10 @@
   '60e71c48c1bfa3050473b8e5': {
     experience: 34000, // Was: 97000
   },
+  // Properties All Around - Experience incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Properties_All_Around
+  // Wiki rewards show +6,600 EXP.
+  '6573397ef3f8344c4575cd87': {
+    experience: 6600, // Was: 11600
+  },
 }
