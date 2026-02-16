@@ -1977,7 +1977,6 @@
       items: [
         {
           count: 345234,
-          // Wiki base reward value. In-game screenshot can show higher values with bonuses (for example 407,376 at +18%).
           item: {
             id: '5449016a4bdc2d6f028b456f',
             name: 'Roubles',
@@ -1994,11 +1993,25 @@
           standing: 0.03,
         },
       ],
+      customization: [
+        {
+          id: 'duck_hunt_customization01',
+          name: 'Scavenger target',
+          customizationType: 'ShootingRangeMark',
+          customizationTypeName: 'Targets',
+        },
+      ],
+      achievement: [
+        {
+          id: '6984ab58ee0ae2c0d5075f33',
+          name: 'Duck Hunt',
+          description: 'Complete the Duck Hunt 2026 event task',
+        },
+      ],
       skillLevelReward: [
         {
           name: 'Perception',
-          // Verified from in-game screenshot evidence.
-          level: 0.04,
+          level: 4,
           skill: {
             id: 'Perception',
             name: 'Perception',
