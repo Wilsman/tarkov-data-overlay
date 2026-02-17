@@ -758,4 +758,10 @@
   '64e7b9bffd30422ed03dad38': {
     experience: 8300, // Was: 25000
   },
+  // Gendarmerie - Tickets, Please - Experience incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Gendarmerie_-_Tickets%2C_Please
+  // Wiki rewards show +7,500 EXP.
+  '64e7b9a4aac4cd0a726562cb': {
+    experience: 7500, // Was: 22600
+  },
 }
