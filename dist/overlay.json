@@ -733,6 +733,34 @@
     },
     "639dbaf17c898a131e1cffff": {
       "experience": 13200
+    },
+    "67a096577e86e067eb045733": {
+      "objectives": {
+        "67a0bf7103442ae640dba835": {
+          "maps": [
+            {
+              "id": "5704e554d2720bac5b8b456e",
+              "name": "Shoreline"
+            }
+          ]
+        },
+        "67dbdd4d6a2e4b8e002b647d": {
+          "maps": [
+            {
+              "id": "5704e554d2720bac5b8b456e",
+              "name": "Shoreline"
+            }
+          ]
+        },
+        "67dbdd819d8208bb2082480e": {
+          "maps": [
+            {
+              "id": "5704e554d2720bac5b8b456e",
+              "name": "Shoreline"
+            }
+          ]
+        }
+      }
     }
   },
   "editions": {
@@ -2374,7 +2402,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-02-17T09:52:45.539Z",
-    "sha256": "3616289d91aeb3fa0e3f764ada3475ebe334fae84447fa911f4353e8cf617400"
+    "generated": "2026-02-17T17:27:24.731Z",
+    "sha256": "6fed365e4831ae0feef7f4bd97453bc4d2ee2ebd3d3fd75cf5664e85ce8484b5"
   }
 }
