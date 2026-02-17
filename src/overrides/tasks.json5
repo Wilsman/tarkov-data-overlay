@@ -776,4 +776,20 @@
   '639dbaf17c898a131e1cffff': {
     experience: 13200, // Was: 26600
   },
+  // Hidden Level - Map say 'Any' when it should say 'Shoreline'
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Hidden_Layer
+  // After Labrys update
+  '67a096577e86e067eb045733': {
+    objectives: {
+      '67a0bf7103442ae640dba835': {
+        maps: [{ id: '5704e554d2720bac5b8b456e', name: 'Shoreline' }],
+      },
+      '67dbdd4d6a2e4b8e002b647d': {
+        maps: [{ id: '5704e554d2720bac5b8b456e', name: 'Shoreline' }],
+      },
+      '67dbdd819d8208bb2082480e': {
+        maps: [{ id: '5704e554d2720bac5b8b456e', name: 'Shoreline' }],
+      }
+    },
+  }
 }
