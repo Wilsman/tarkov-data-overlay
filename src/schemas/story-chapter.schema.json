@@ -46,12 +46,8 @@
           "type": "object",
           "required": ["id", "name"],
           "properties": {
-            "id": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            }
+            "id": { "type": "string" },
+            "name": { "type": "string" }
           },
           "additionalProperties": false
         }
@@ -63,12 +59,8 @@
           "type": "object",
           "required": ["id", "name"],
           "properties": {
-            "id": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            }
+            "id": { "type": "string" },
+            "name": { "type": "string" }
           },
           "additionalProperties": false
         }
@@ -80,17 +72,61 @@
           "type": "object",
           "required": ["id", "name"],
           "properties": {
+            "id": { "type": "string" },
+            "name": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "description": {
+        "description": "Brief description or guidance for the chapter",
+        "type": ["string", "null"]
+      },
+      "notes": {
+        "description": "Additional notes (reputation consequences, tips, etc.)",
+        "type": ["string", "null"]
+      },
+      "objectives": {
+        "description": "Ordered list of chapter objectives",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["id", "type", "description"],
+          "properties": {
             "id": {
+              "description": "Globally unique objective ID ({chapter}-{main|opt}-{n})",
               "type": "string"
             },
-            "name": {
+            "type": {
+              "description": "Whether the objective is required or bonus",
+              "type": "string",
+              "enum": ["main", "optional"]
+            },
+            "description": {
+              "description": "Human-readable objective text",
+              "type": "string"
+            },
+            "notes": {
+              "description": "Optional guidance or tips for this objective",
               "type": "string"
             }
           },
           "additionalProperties": false
         }
+      },
+      "rewards": {
+        "description": "Reward summary for completing the chapter",
+        "type": ["object", "null"],
+        "properties": {
+          "description": {
+            "description": "Human-readable reward description",
+            "type": "string"
+          }
+        },
+        "required": ["description"],
+        "additionalProperties": false
       }
     },
-    "additionalProperties": true
+    "additionalProperties": false
   }
 }
