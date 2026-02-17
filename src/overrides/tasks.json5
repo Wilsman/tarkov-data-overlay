@@ -752,4 +752,10 @@
   '66aba85403e0ee3101042877': {
     experience: 24000, // Was: 46700
   },
+  // Gendarmerie - District Patrol - Experience incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Gendarmerie_-_District_Patrol
+  // Wiki rewards show +8,300 EXP.
+  '64e7b9bffd30422ed03dad38': {
+    experience: 8300, // Was: 25000
+  },
 }
