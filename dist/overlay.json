@@ -721,6 +721,18 @@
     },
     "66aba85403e0ee3101042877": {
       "experience": 24000
+    },
+    "64e7b9bffd30422ed03dad38": {
+      "experience": 8300
+    },
+    "64e7b9a4aac4cd0a726562cb": {
+      "experience": 7500
+    },
+    "64e7b99017ab941a6f7bf9d7": {
+      "experience": 7100
+    },
+    "639dbaf17c898a131e1cffff": {
+      "experience": 13200
     }
   },
   "editions": {
@@ -2362,7 +2374,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-02-16T16:02:16.089Z",
-    "sha256": "aa85b54e92b038b1bc02d041f89d5c7f9a3da121179c45f524cbabe9856804ff"
+    "generated": "2026-02-17T09:52:45.539Z",
+    "sha256": "3616289d91aeb3fa0e3f764ada3475ebe334fae84447fa911f4353e8cf617400"
   }
 }
