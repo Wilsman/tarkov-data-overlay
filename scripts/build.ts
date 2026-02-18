@@ -17,6 +17,35 @@ import {
 
 const { rootDir, srcDir, distDir } = getProjectPaths();
 
+const VALID_MODES = ['regular', 'pve'] as const;
+
+/**
+ * Load mode-specific override and addition files
+ */
+function loadModeFiles(): Partial<Record<string, Record<string, Record<string, unknown>>>> | undefined {
+  const modes: Record<string, Record<string, Record<string, unknown>>> = {};
+
+  for (const mode of VALID_MODES) {
+    const modeData: Record<string, Record<string, unknown>> = {};
+
+    const overridesDir = join(srcDir, 'overrides', 'modes', mode);
+    if (existsSync(overridesDir)) {
+      Object.assign(modeData, loadAllJson5FromDir(overridesDir));
+    }
+
+    const additionsDir = join(srcDir, 'additions', 'modes', mode);
+    if (existsSync(additionsDir)) {
+      Object.assign(modeData, loadAllJson5FromDir(additionsDir, false));
+    }
+
+    if (Object.keys(modeData).length > 0) {
+      modes[mode] = modeData;
+    }
+  }
+
+  return Object.keys(modes).length > 0 ? modes : undefined;
+}
+
 /**
  * Load all source files from overrides and additions directories
  */
@@ -30,6 +59,11 @@ function loadSourceFiles(): Omit<OverlayOutput, '$meta'> {
   // Load additions (new data not in tarkov.dev)
   const additions = loadAllJson5FromDir(join(srcDir, 'additions'), false);
   Object.assign(output, additions);
+
+  const modes = loadModeFiles();
+  if (modes) {
+    output.modes = modes;
+  }
 
   return output;
 }
@@ -78,11 +112,26 @@ function build(): void {
 
   // Summary
   const entityCounts = Object.entries(data)
+    .filter(([key]) => key !== 'modes')
     .map(([key, value]) => `${key}: ${Object.keys(value as object).length}`)
     .join(', ');
 
+  const modeCounts = data.modes
+    ? Object.entries(data.modes)
+        .map(([mode, modeData]) => {
+          const inner = Object.entries(modeData as Record<string, Record<string, unknown>>)
+            .map(([k, v]) => `${k}: ${Object.keys(v).length}`)
+            .join(', ');
+          return `${mode}(${inner})`;
+        })
+        .join(', ')
+    : undefined;
+
   console.log('✅ Built overlay.json');
   console.log(`   Entities: ${entityCounts}`);
+  if (modeCounts) {
+    console.log(`   Modes: ${modeCounts}`);
+  }
   console.log(`   Version: ${output.$meta.version}`);
   console.log(`   Generated: ${output.$meta.generated}`);
   console.log(`   SHA256: ${output.$meta.sha256?.substring(0, 16)}...`);

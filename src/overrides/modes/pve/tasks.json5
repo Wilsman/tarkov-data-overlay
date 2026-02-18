@@ -1,0 +1,26 @@
+{
+  // Vacate the Premises - PvE has 36 kills (differs from PvP's 24)
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Vacate_the_Premises
+  '67d03be712fb5f8fd2096332': {
+    objectives: {
+      '67d03be712fb5f8fd2096334': {
+        count: 36,
+      },
+    },
+  },
+  // Provide Viewership - PvE prereq status incorrect
+  // API returns status: ["complete"] but user confirmed task is available when prereq is active
+  // Proof: https://github.com/tarkovtracker-org/tarkov-data-overlay/issues/98
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Provide_Viewership
+  '675c15fbf7da9792a4059871': {
+    taskRequirements: [
+      {
+        task: {
+          id: '6834158f2f0e2a7eb90b62c8',
+          name: 'Easy Money - Part 2 [PVE ZONE]',
+        },
+        status: ['active', 'complete'],
+      },
+    ],
+  },
+}

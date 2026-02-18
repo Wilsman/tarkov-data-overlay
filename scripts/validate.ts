@@ -113,6 +113,21 @@ export function validateSourceFiles(): SchemaValidationResult[] {
     results.push(validateFile(filePath, `additions/${file}`, validators));
   }
 
+  // Validate mode-specific overrides
+  for (const mode of ['regular', 'pve']) {
+    const modeOverridesDir = join(srcDir, 'overrides', 'modes', mode);
+    for (const file of listJson5Files(modeOverridesDir)) {
+      const filePath = join(modeOverridesDir, file);
+      results.push(validateFile(filePath, `overrides/modes/${mode}/${file}`, validators));
+    }
+
+    const modeAdditionsDir = join(srcDir, 'additions', 'modes', mode);
+    for (const file of listJson5Files(modeAdditionsDir)) {
+      const filePath = join(modeAdditionsDir, file);
+      results.push(validateFile(filePath, `additions/modes/${mode}/${file}`, validators));
+    }
+  }
+
   return results;
 }
 

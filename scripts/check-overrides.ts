@@ -15,6 +15,7 @@
  */
 
 import { join } from 'path';
+import { existsSync } from 'fs';
 import { pathToFileURL } from 'url';
 import {
   getProjectPaths,
@@ -62,6 +63,15 @@ type EditionData = {
   exclusiveTaskIds?: string[];
   excludedTaskIds?: string[];
 };
+
+/**
+ * Load mode-specific task overrides from source file
+ */
+function loadModeTaskOverrides(mode: string): Record<string, TaskOverride> {
+  const filePath = join(srcDir, 'overrides', 'modes', mode, 'tasks.json5');
+  if (!existsSync(filePath)) return {};
+  return loadJson5File<Record<string, TaskOverride>>(filePath);
+}
 
 /**
  * Load edition additions from source file
@@ -489,6 +499,21 @@ async function main(): Promise<void> {
     printProgress('Checking additions against API...\n');
     const additionResults = checkTaskAdditions(additions, apiTasks);
     printAdditionResults(additionResults);
+
+    // Validate mode-specific overrides
+    for (const mode of ['regular', 'pve'] as const) {
+      const modeOverrides = loadModeTaskOverrides(mode);
+      const modeOverrideCount = Object.keys(modeOverrides).length;
+      if (modeOverrideCount === 0) continue;
+
+      printProgress(`Fetching ${mode} tasks from tarkov.dev API...`);
+      const modeApiTasks = await fetchTasks(mode);
+      printSuccess(`Fetched ${modeApiTasks.length} ${mode} tasks from API\n`);
+
+      printProgress(`Validating ${mode} mode overrides...\n`);
+      const modeResults = validateAllOverrides(modeOverrides, modeApiTasks);
+      printResults(modeResults);
+    }
 
     printProgress('Checking edition exclusions against API...\n');
     const missingEditionRefs = checkEditionTaskReferences(editions, apiTasks);

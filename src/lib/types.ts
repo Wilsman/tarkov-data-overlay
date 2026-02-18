@@ -265,6 +265,15 @@ export interface StoryChapter {
   rewards?: StoryRewards;
 }
 
+/** Valid game modes for mode-specific overrides */
+export type GameMode = 'regular' | 'pve';
+
+/** Mode-specific overlay data */
+export interface ModeOverlay {
+  tasks?: Record<string, TaskOverride>;
+  tasksAdd?: Record<string, TaskAddition>;
+}
+
 /** Built overlay output structure */
 export interface OverlayOutput {
   tasks?: Record<string, TaskOverride>;
@@ -274,6 +283,7 @@ export interface OverlayOutput {
   hideout?: Record<string, unknown>;
   editions?: Record<string, unknown>;
   storyChapters?: Record<string, StoryChapter>;
+  modes?: Partial<Record<GameMode, ModeOverlay>>;
   $meta: OverlayMeta;
 }
 

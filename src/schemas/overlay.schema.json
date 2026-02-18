@@ -47,6 +47,29 @@
     "traders": {
       "description": "Trader corrections",
       "type": "object"
+    },
+    "modes": {
+      "description": "Game-mode-specific overrides applied on top of shared corrections",
+      "type": "object",
+      "properties": {
+        "regular": {
+          "type": "object",
+          "properties": {
+            "tasks": { "$ref": "task-override.schema.json" },
+            "tasksAdd": { "$ref": "task-additions.schema.json" }
+          },
+          "additionalProperties": false
+        },
+        "pve": {
+          "type": "object",
+          "properties": {
+            "tasks": { "$ref": "task-override.schema.json" },
+            "tasksAdd": { "$ref": "task-additions.schema.json" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     }
   },
   "title": "Tarkov Data Overlay",

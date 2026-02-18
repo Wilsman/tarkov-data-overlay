@@ -456,7 +456,7 @@
     "67d03be712fb5f8fd2096332": {
       "objectives": {
         "67d03be712fb5f8fd2096334": {
-          "description": "Eliminate any target inside The Labyrinth (PvP: 24 kills / PvE: 36 kills)"
+          "description": "Eliminate any target inside The Labyrinth"
         }
       }
     },
@@ -3163,9 +3163,47 @@
       }
     }
   },
+  "modes": {
+    "regular": {
+      "tasks": {
+        "67d03be712fb5f8fd2096332": {
+          "objectives": {
+            "67d03be712fb5f8fd2096334": {
+              "count": 24
+            }
+          }
+        }
+      }
+    },
+    "pve": {
+      "tasks": {
+        "67d03be712fb5f8fd2096332": {
+          "objectives": {
+            "67d03be712fb5f8fd2096334": {
+              "count": 36
+            }
+          }
+        },
+        "675c15fbf7da9792a4059871": {
+          "taskRequirements": [
+            {
+              "task": {
+                "id": "6834158f2f0e2a7eb90b62c8",
+                "name": "Easy Money - Part 2 [PVE ZONE]"
+              },
+              "status": [
+                "active",
+                "complete"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-02-17T22:44:49.674Z",
-    "sha256": "b9bb5e04ac121c502f59d9dde83c7ddc313bcf7c176b2035fb15491aa32c40b0"
+    "generated": "2026-02-18T02:23:22.193Z",
+    "sha256": "b15a3e0a2671bc3d2d9faa417ea4155115e02e191b6430cf669201dd9c89dd2a"
   }
 }

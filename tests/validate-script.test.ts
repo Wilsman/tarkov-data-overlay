@@ -30,6 +30,14 @@ describe('scripts/validate helpers', () => {
     const expectedFiles = [
       ...listJson5Files(join(srcDir, 'overrides')).map((file) => `overrides/${file}`),
       ...listJson5Files(join(srcDir, 'additions')).map((file) => `additions/${file}`),
+      ...['regular', 'pve'].flatMap((mode) => [
+        ...listJson5Files(join(srcDir, 'overrides', 'modes', mode)).map(
+          (file) => `overrides/modes/${mode}/${file}`
+        ),
+        ...listJson5Files(join(srcDir, 'additions', 'modes', mode)).map(
+          (file) => `additions/modes/${mode}/${file}`
+        ),
+      ]),
     ].sort();
 
     const results = validateSourceFiles();

@@ -13,8 +13,8 @@ const TARKOV_API = "https://api.tarkov.dev/graphql";
  * GraphQL query for fetching all tasks with their details
  */
 const TASKS_QUERY = `
-  query {
-    tasks(lang: en) {
+  query($gameMode: GameMode) {
+    tasks(lang: en, gameMode: $gameMode) {
       id
       name
       minPlayerLevel
@@ -161,11 +161,11 @@ const TASKS_QUERY = `
 /**
  * Execute a GraphQL query against the tarkov.dev API
  */
-async function executeQuery<T>(query: string): Promise<T> {
+async function executeQuery<T>(query: string, variables?: Record<string, unknown>): Promise<T> {
   const response = await fetch(TARKOV_API, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query }),
+    body: JSON.stringify({ query, variables }),
   });
 
   if (!response.ok) {
@@ -186,8 +186,9 @@ async function executeQuery<T>(query: string): Promise<T> {
 /**
  * Fetch all tasks from tarkov.dev API
  */
-export async function fetchTasks(): Promise<TaskData[]> {
-  const data = await executeQuery<{ tasks: TaskData[] }>(TASKS_QUERY);
+export async function fetchTasks(gameMode?: 'regular' | 'pve'): Promise<TaskData[]> {
+  const variables = gameMode ? { gameMode } : undefined;
+  const data = await executeQuery<{ tasks: TaskData[] }>(TASKS_QUERY, variables);
   return data.tasks;
 }
 
