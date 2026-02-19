@@ -338,11 +338,6 @@ function connectEvents() {
   eventSource.addEventListener("summary", (event) => {
     updateStatus(JSON.parse(event.data));
   });
-  eventSource.addEventListener("error", (event) => {
-    if (event.data) {
-      updateStatus(JSON.parse(event.data));
-    }
-  });
   eventSource.onerror = () => {
     if (overlayStatusEl) {
       overlayStatusEl.textContent = "Connection lost";
@@ -407,6 +402,7 @@ function initNavRouting() {
 
   window.addEventListener("popstate", () => {
     const nextView = getViewFromPath();
+    currentMode = getModeFromUrl();
     currentView = nextView;
     updateNav();
     updateModeSwitch();

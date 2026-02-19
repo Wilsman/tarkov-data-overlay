@@ -316,16 +316,6 @@ function getValueType(value) {
   return typeof value;
 }
 
-function sortKey(value) {
-  if (value === undefined) return "undefined";
-  if (value === null) return "null";
-  if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
-    return String(value);
-  }
-  const json = JSON.stringify(value);
-  return json ?? String(value);
-}
-
 function normalizeCompareValue(value) {
   if (Array.isArray(value)) {
     // Preserve array order so reordering is treated as a real change.
@@ -928,7 +918,7 @@ function startOverlayWatcher() {
 
   fs.watchFile(OVERLAY_PATH, { interval: 1000 }, (curr, prev) => {
     if (curr.mtimeMs !== prev.mtimeMs) {
-      refreshOverlay();
+      refreshOverlay().catch(() => {});
     }
   });
   refreshOverlay().catch(() => {});
@@ -1088,6 +1078,7 @@ if (process.env.NODE_ENV !== "test") {
 // Export functions for testing
 if (process.env.NODE_ENV === "test") {
   module.exports = {
+    MAX_ROWS,
     buildTasksSections,
     buildSummary,
     buildOverrideSections,

@@ -57,6 +57,7 @@ describe('module import sanity', () => {
 // ---------------------------------------------------------------------------
 
 const {
+  MAX_ROWS,
   buildTasksSections,
   buildSummary,
   buildOverrideSections,
@@ -215,11 +216,14 @@ describe('buildSummary', () => {
 
   it('returns an error when overlay is not loaded', () => {
     const saved = overlayState.data;
-    overlayState.data = null;
-    const s = buildSummary('tasks', 'regular');
-    expect(s.sections).toEqual([]);
-    expect(s.error).toMatch(/not loaded/i);
-    overlayState.data = saved;
+    try {
+      overlayState.data = null;
+      const s = buildSummary('tasks', 'regular');
+      expect(s.sections).toEqual([]);
+      expect(s.error).toMatch(/not loaded/i);
+    } finally {
+      overlayState.data = saved;
+    }
   });
 
   it('returns 4 task sections for the "tasks" view', () => {
@@ -392,10 +396,10 @@ describe('createSection / pushRow', () => {
     const s = createSection('S', ['A']);
     expect(s).toEqual({ title: 'S', columns: ['A'], rows: [], truncated: false });
   });
-  it('truncates at MAX_ROWS (250)', () => {
+  it('truncates at MAX_ROWS', () => {
     const s = createSection('S', ['A']);
-    for (let i = 0; i < 251; i++) pushRow(s, [`v${i}`]);
-    expect(s.rows).toHaveLength(250);
+    for (let i = 0; i <= MAX_ROWS; i++) pushRow(s, [`v${i}`]);
+    expect(s.rows).toHaveLength(MAX_ROWS);
     expect(s.truncated).toBe(true);
   });
 });
@@ -438,15 +442,31 @@ describe('HTTP — real monitor/server.js handlers', () => {
     // Fill the summaryByKey cache (same as refreshOverlay → rebuildSummaries)
     rebuildSummaries();
 
-    return new Promise<void>((resolve) => {
+    return new Promise<void>((resolve, reject) => {
       server.listen(0, () => {
-        baseUrl = `http://localhost:${server.address().port}`;
+        const address = server.address();
+        if (!address || typeof address === 'string') {
+          reject(new Error('Unable to determine monitor server address'));
+          return;
+        }
+        baseUrl = `http://localhost:${address.port}`;
         resolve();
       });
     });
   });
 
-  afterAll(() => new Promise<void>((resolve) => server.close(resolve)));
+  afterAll(() => {
+    overlayState.data = null;
+    overlayState.updatedAt = null;
+    overlayState.error = null;
+    apiState.regular.data = null;
+    apiState.regular.updatedAt = null;
+    apiState.regular.error = null;
+    apiState.pve.data = null;
+    apiState.pve.updatedAt = null;
+    apiState.pve.error = null;
+    return new Promise<void>((resolve) => server.close(resolve));
+  });
 
   // -- /latest ---------------------------------------------------------------
 
@@ -496,39 +516,48 @@ describe('HTTP — real monitor/server.js handlers', () => {
 
   it('GET /events — SSE headers', async () => {
     const res = await fetch(`${baseUrl}/events?view=tasks&mode=regular`);
-    expect(res.status).toBe(200);
-    expect(res.headers.get('content-type')).toContain('text/event-stream');
-    expect(res.headers.get('cache-control')).toBe('no-store');
-    expect(res.headers.get('connection')).toContain('keep-alive');
-    res.body!.getReader().cancel();
+    const reader = res.body!.getReader();
+    try {
+      expect(res.status).toBe(200);
+      expect(res.headers.get('content-type')).toContain('text/event-stream');
+      expect(res.headers.get('cache-control')).toBe('no-store');
+      expect(res.headers.get('connection')).toContain('keep-alive');
+    } finally {
+      await reader.cancel();
+    }
   });
 
   it('GET /events — first frame is a parseable summary with sections', async () => {
     const res = await fetch(`${baseUrl}/events?view=tasks&mode=regular`);
     const reader = res.body!.getReader();
-    const { value } = await reader.read();
-    const text = new TextDecoder().decode(value);
+    try {
+      const { value } = await reader.read();
+      const text = new TextDecoder().decode(value);
 
-    expect(text).toContain('event: summary');
+      expect(text).toContain('event: summary');
 
-    const dataLine = text.split('\n').find((l: string) => l.startsWith('data: '));
-    expect(dataLine).toBeDefined();
+      const dataLine = text.split('\n').find((l: string) => l.startsWith('data: '));
+      expect(dataLine).toBeDefined();
 
-    const payload = JSON.parse(dataLine!.slice(6));
-    expect(payload.view).toBe('tasks');
-    expect(payload.mode).toBe('regular');
-    expect(payload.sections).toHaveLength(4);
-
-    reader.cancel();
+      const payload = JSON.parse(dataLine!.slice(6));
+      expect(payload.view).toBe('tasks');
+      expect(payload.mode).toBe('regular');
+      expect(payload.sections).toHaveLength(4);
+    } finally {
+      await reader.cancel();
+    }
   });
 
   it('GET /events — non-mode view (items)', async () => {
     const res = await fetch(`${baseUrl}/events?view=items`);
     const reader = res.body!.getReader();
-    const { value } = await reader.read();
-    const text = new TextDecoder().decode(value);
-    expect(text).toContain('"view":"items"');
-    reader.cancel();
+    try {
+      const { value } = await reader.read();
+      const text = new TextDecoder().decode(value);
+      expect(text).toContain('"view":"items"');
+    } finally {
+      await reader.cancel();
+    }
   });
 
   // -- error paths -----------------------------------------------------------
