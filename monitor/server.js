@@ -246,11 +246,11 @@ function serveStatic(res, requestPath) {
 }
 function createSection(title, columns, options = {}) {
   return {
+    ...options,
     title,
     columns,
     rows: [],
     truncated: false,
-    ...options,
   };
 }
 
@@ -328,11 +328,8 @@ function sortKey(value) {
 
 function normalizeCompareValue(value) {
   if (Array.isArray(value)) {
-    const normalized = value.map(normalizeCompareValue);
-    return normalized
-      .map((item) => ({ key: sortKey(item), value: item }))
-      .sort((a, b) => a.key.localeCompare(b.key))
-      .map((item) => item.value);
+    // Preserve array order so reordering is treated as a real change.
+    return value.map(normalizeCompareValue);
   }
 
   if (value && typeof value === "object") {
@@ -644,7 +641,7 @@ async function refreshOverlay() {
     lock.isReading = false;
     if (lock.pendingRead) {
       lock.pendingRead = false;
-      refreshOverlay();
+      refreshOverlay().catch(() => {});
     }
   }
 }
@@ -725,7 +722,7 @@ const TASKS_QUERY = `
 
 async function executeQuery(query, variables) {
   if (typeof fetch !== "function") {
-    throw new Error("Global fetch is not available in this Node runtime");
+    throw new Error("Global fetch is not available. Node 20.10.0+ is required");
   }
   const response = await fetch(TARKOV_API, {
     method: "POST",
@@ -793,7 +790,7 @@ async function refreshApiTasks(mode) {
     lock.isReading = false;
     if (lock.pendingRead) {
       lock.pendingRead = false;
-      refreshApiTasks(mode);
+      refreshApiTasks(mode).catch(() => {});
     }
   }
 }
@@ -920,9 +917,12 @@ function getState(view, mode) {
 
 function startOverlayWatcher() {
   if (isRemotePath(OVERLAY_PATH)) {
-    setInterval(() => {
-      refreshOverlay();
-    }, OVERLAY_POLL_MS);
+    const poll = () => {
+      refreshOverlay()
+        .catch(() => {})
+        .finally(() => setTimeout(poll, OVERLAY_POLL_MS));
+    };
+    setTimeout(poll, 0);
     return;
   }
 
@@ -931,17 +931,20 @@ function startOverlayWatcher() {
       refreshOverlay();
     }
   });
+  refreshOverlay().catch(() => {});
 }
 
 function startApiPolling() {
-  refreshApiTasks("regular");
-  refreshApiTasks("pve");
-  setInterval(() => refreshApiTasks("regular"), API_POLL_MS);
-  setInterval(() => refreshApiTasks("pve"), API_POLL_MS);
+  const schedulePoll = (mode) => {
+    refreshApiTasks(mode)
+      .catch(() => {})
+      .finally(() => setTimeout(() => schedulePoll(mode), API_POLL_MS));
+  };
+  schedulePoll("regular");
+  schedulePoll("pve");
 }
 
 startOverlayWatcher();
-refreshOverlay();
 startApiPolling();
 
 const server = http.createServer((req, res) => {

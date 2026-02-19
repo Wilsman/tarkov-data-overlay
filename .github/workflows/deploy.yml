@@ -24,11 +24,12 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            set -e
             cd ${{ secrets.SSH_PROJECT_PATH }}
             git fetch origin main
             git checkout main
             git reset --hard origin/main
-            git clean -fdx
+            git clean -fd
             npm ci
             npm run build
 

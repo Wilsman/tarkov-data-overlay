@@ -1,7 +1,6 @@
 const overlayStatusEl = document.getElementById("overlay-status");
 const apiStatusEl = document.getElementById("api-status");
 const overlayBuildEl = document.getElementById("overlay-build");
-const overlayPathEl = document.getElementById("overlay-path");
 const emptyEl = document.getElementById("empty");
 const sectionsEl = document.getElementById("sections");
 const titleEl = document.getElementById("page-title");
@@ -12,6 +11,7 @@ const modeSwitchEl = document.getElementById("mode-switch");
 
 let pollTimer = null;
 let eventSource = null;
+let latestFetchController = null;
 
 const viewConfig = {
   tasks: {
@@ -108,7 +108,9 @@ function updateModeSwitch() {
   }
   modeSwitchEl.style.display = "flex";
   modeSwitchEl.querySelectorAll("button").forEach((button) => {
-    if (button.dataset.mode === currentMode) {
+    const isActive = button.dataset.mode === currentMode;
+    button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    if (isActive) {
       button.classList.add("active");
     } else {
       button.classList.remove("active");
@@ -267,9 +269,6 @@ function updateStatus(state) {
     const version = meta?.version ? `v${meta.version}` : "";
     overlayBuildEl.textContent = [version, generated].filter(Boolean).join(" · ") || "n/a";
   }
-  if (overlayPathEl) {
-    overlayPathEl.textContent = state.overlay?.path || "n/a";
-  }
 
   renderSummary(state.sections);
   renderSections(state.sections);
@@ -287,10 +286,14 @@ function updateUrlMode() {
 }
 
 async function fetchLatest() {
+  if (latestFetchController) {
+    latestFetchController.abort();
+  }
+  latestFetchController = new AbortController();
   try {
     const response = await fetch(
       `/latest?view=${currentView}&mode=${currentMode}`,
-      { cache: "no-store" },
+      { cache: "no-store", signal: latestFetchController.signal },
     );
     if (!response.ok) {
       throw new Error("latest_fetch_failed");
@@ -298,9 +301,14 @@ async function fetchLatest() {
     const data = await response.json();
     updateStatus(data);
   } catch (error) {
+    if (error && error.name === "AbortError") {
+      return;
+    }
     if (overlayStatusEl) {
       overlayStatusEl.textContent = "Load error";
     }
+  } finally {
+    latestFetchController = null;
   }
 }
 
@@ -318,6 +326,10 @@ function connectEvents() {
 
   if (eventSource) {
     eventSource.close();
+  }
+  if (pollTimer) {
+    clearInterval(pollTimer);
+    pollTimer = null;
   }
 
   eventSource = new EventSource(
@@ -359,11 +371,56 @@ function initModeSwitch() {
   });
 }
 
+function setView(nextView) {
+  if (!nextView || nextView === currentView) {
+    return;
+  }
+  currentView = nextView;
+  updateNav();
+  updateModeSwitch();
+  updateTitle();
+  updateUrlMode();
+  fetchLatest();
+  connectEvents();
+}
+
+function initNavRouting() {
+  if (!navEl) {
+    return;
+  }
+  navEl.addEventListener("click", (event) => {
+    const target = event.target.closest("a[data-view]");
+    if (!target) {
+      return;
+    }
+    event.preventDefault();
+    const nextView = target.dataset.view;
+    if (!nextView) {
+      return;
+    }
+    const href = target.getAttribute("href") || "/";
+    window.history.pushState({ view: nextView }, "", href);
+    setView(nextView);
+  });
+
+  window.addEventListener("popstate", () => {
+    const nextView = getViewFromPath();
+    currentView = nextView;
+    updateNav();
+    updateModeSwitch();
+    updateTitle();
+    updateUrlMode();
+    fetchLatest();
+    connectEvents();
+  });
+}
+
 function init() {
   updateNav();
   updateModeSwitch();
   updateTitle();
   initModeSwitch();
+  initNavRouting();
   updateUrlMode();
   fetchLatest();
   if (!connectEvents()) {

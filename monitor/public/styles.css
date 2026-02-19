@@ -257,11 +257,7 @@ h1 {
   color: #e09a8b;
 }
 
-.badge.changed {
-  background: rgba(200, 169, 107, 0.2);
-  color: #e2c58a;
-}
-
+.badge.changed,
 .badge.override {
   background: rgba(200, 169, 107, 0.2);
   color: #e2c58a;
