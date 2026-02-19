@@ -1081,3 +1081,21 @@ server.on("error", (error) => {
 });
 
 startServer(currentPort);
+// Export functions for testing
+if (process.env.NODE_ENV === "test") {
+  module.exports = {
+    buildTasksSections,
+    buildSummary,
+    buildOverrideSections,
+    buildEditionsSections,
+    buildStoryChapterSections,
+    buildTaskAdditionSections,
+    mergeTaskOverrides,
+    valuesEqual,
+    formatValue,
+    normalizeView,
+    normalizeMode,
+    createSection,
+    pushRow,
+  };
+}

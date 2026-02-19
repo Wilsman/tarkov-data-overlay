@@ -339,7 +339,9 @@ function connectEvents() {
     updateStatus(JSON.parse(event.data));
   });
   eventSource.addEventListener("error", (event) => {
-    updateStatus(JSON.parse(event.data));
+    if (event.data) {
+      updateStatus(JSON.parse(event.data));
+    }
   });
   eventSource.onerror = () => {
     if (overlayStatusEl) {
